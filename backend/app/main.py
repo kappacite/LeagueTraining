@@ -5,7 +5,7 @@ from .config import Settings, get_settings
 from .db import connect, migrate
 from .ddragon import DDragon, load
 from .puzzles.loader import Catalog, load_catalog
-from .routes import auth, puzzles
+from .routes import auth, community, puzzles
 
 
 def create_app(settings: Settings | None = None, dd: DDragon | None = None,
@@ -22,4 +22,5 @@ def create_app(settings: Settings | None = None, dd: DDragon | None = None,
     security.install(app, settings.public_origin)
     app.include_router(auth.router)
     app.include_router(puzzles.router)
+    app.include_router(community.router)
     return app
