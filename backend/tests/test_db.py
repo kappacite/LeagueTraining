@@ -11,7 +11,7 @@ def test_migrate_creates_tables_and_is_idempotent(tmp_path):
     migrate(conn)
     names = {r["name"] for r in conn.execute("select name from sqlite_master where type='table'")}
     assert {"users", "allowlist", "sessions", "attempts", "daily"} <= names
-    assert conn.execute("pragma user_version").fetchone()[0] == 1
+    assert conn.execute("pragma user_version").fetchone()[0] == 2
 
 
 def test_only_one_scored_attempt_per_user_puzzle(conn):
