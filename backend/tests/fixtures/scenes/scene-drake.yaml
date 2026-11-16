@@ -1,0 +1,73 @@
+id: scene-drake
+type: scene
+role: mid
+difficulty: moyen
+patch: "15.23.1"
+title: "Le drake de 14 minutes"
+context: "Ton bot vient de back. Le drake apparaît à 14:00."
+me: { champion: Ahri, hp: 75, mana: 60, gold: 850, summoners: [SummonerFlash], items: [1056] }
+start: n1
+lesson: "Prépare l'objectif : prio, vision, puis le nombre."
+nodes:
+  n1:
+    intro:
+      - t: 0
+        clock: "13:10"
+        champions:
+          - { champion: Ahri, team: ally, x: 50, y: 50, me: true }
+          - { champion: LeeSin, team: enemy, x: 30, y: 30 }
+          - { champion: Zed, team: enemy, x: 56, y: 44 }
+        wards: [ { id: w1, team: ally, x: 62, y: 60 } ]
+        objectives: [ { type: dragon, spawn_in: 50 } ]
+        caption: "Lee Sin farm en haut."
+      - t: 4
+        clock: "13:14"
+        champions: [ { champion: LeeSin, x: 22, y: 18, hidden: true } ]
+        caption: "Il disparaît vers le top."
+    question: "Que fais-tu ?"
+    time_limit: 15
+    choices:
+      - id: a
+        text: "Prendre les plates"
+        grade: erreur
+        explanation: "Tu arrives en retard."
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 58, y: 42 } ] }
+          - { t: 3, champions: [ { champion: Ahri, dead: true } ], caption: "Tu meurs." }
+        ending: dead
+      - id: b
+        text: "Push et warder la rivière"
+        grade: excellent
+        explanation: "Prio et vision."
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 50, y: 50 } ] }
+          - { t: 3, champions: [ { champion: Ahri, x: 64, y: 66 } ], wards: [ { id: w2, team: ally, x: 70, y: 66 } ] }
+        next: n2
+      - id: c
+        text: "Back"
+        grade: correct
+        explanation: "Sûr mais lent."
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 10, y: 90 } ] }
+        next: n2
+  n2:
+    intro:
+      - { t: 0, clock: "13:55", champions: [ { champion: LeeSin, x: 70, y: 74, hidden: false } ], caption: "Lee Sin se montre." }
+    time_limit: 15
+    choices:
+      - id: a
+        text: "Engager seul"
+        grade: erreur
+        explanation: "Trois contre un."
+        consequence: [ { t: 0, champions: [ { champion: Ahri, dead: true } ] } ]
+        ending: lost
+      - id: b
+        text: "Attendre ton jungler"
+        grade: excellent
+        explanation: "Le nombre gagne."
+        consequence: [ { t: 0, events: [ { type: objective, x: 67, y: 70, label: "Drake" } ] } ]
+        ending: best
+endings:
+  dead: { title: "Mort à 13:52", outcome: { drakes: -1, gold: -1100, kills: -1 }, note: "Ils prennent le drake." }
+  lost: { title: "Fight perdu", outcome: { drakes: -1, kills: -2 } }
+  best: { title: "Drake + 2 tours", outcome: { drakes: 1, towers: 2, gold: 2400 } }
