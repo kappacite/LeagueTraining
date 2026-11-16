@@ -1,0 +1,47 @@
+id: jungle-cross-map
+type: decision
+role: jungle
+difficulty: difficile
+patch: "16.22.1"
+title: "Ils commencent le drake"
+context: >
+  14:00. Les cinq ennemis viennent de commencer le drake (le 2e de la partie, ils ont déjà le 1er).
+  Tu es top avec ton top laner, juste à côté du Héraut qui vient d'apparaître. Ton mid et ton bot
+  sont trop loin pour contester à temps.
+me: { champion: Sejuani, hp: 90, mana: 70, gold: 500, summoners: [SummonerFlash, SummonerSmite], items: [3068, 3047] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Sejuani, team: ally, x: 30, y: 26, me: true }
+    - { champion: Darius, team: ally, x: 22, y: 20 }
+    - { champion: Ahri, team: ally, x: 30, y: 62 }
+    - { champion: Jinx, team: ally, x: 30, y: 90 }
+    - { champion: Thresh, team: ally, x: 34, y: 88 }
+    - { champion: LeeSin, team: enemy, x: 66, y: 70 }
+    - { champion: Syndra, team: enemy, x: 64, y: 66 }
+    - { champion: Kaisa, team: enemy, x: 70, y: 72 }
+    - { champion: Nautilus, team: enemy, x: 68, y: 68 }
+    - { champion: Renekton, team: enemy, x: 62, y: 72 }
+  wards: [ { team: ally, x: 60, y: 66 } ]
+  objectives: [ { type: dragon }, { type: herald } ]
+choices:
+  - id: a
+    text: "Courir au drake pour tenter un vol avec Châtiment"
+    grade: erreur
+    explanation: >
+      Tu arriveras quand le drake sera presque mort, seul face à cinq ennemis. Au mieux tu voles le drake
+      et tu meurs, au pire tu meurs sans rien. Et le Héraut reste à eux après.
+  - id: b
+    text: "Prendre le Héraut avec ton top, puis l'utiliser sur une tour"
+    grade: excellent
+    explanation: >
+      Tu ne peux pas contester le drake, alors tu échanges : objectif contre objectif. Le Héraut détruit des
+      plaques et une tour, ce qui compense une partie du drake. Ton mid et ton bot doivent pendant ce temps
+      reculer pour ne pas se faire attraper.
+  - id: c
+    text: "Regrouper toute l'équipe mid pour défendre"
+    grade: correct
+    explanation: >
+      Ça évite de perdre plus, mais tu laisses le drake gratuit sans rien prendre en échange.
+      Le Héraut est juste à côté de toi : c'est de la valeur perdue.
+lesson: "Quand tu ne peux pas contester un objectif, prends-en un autre de l'autre côté de la carte."

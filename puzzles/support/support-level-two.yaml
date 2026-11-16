@@ -1,0 +1,38 @@
+id: support-level-two
+type: decision
+role: support
+difficulty: facile
+patch: "16.22.1"
+title: "Ils vont passer niveau 2"
+context: >
+  1:50. L'adversaire vient de tuer un sbire de plus que vous dans la première vague : ils vont passer
+  niveau 2 avant vous. Leona est au contact de la lane, ton ADC est en avant pour farmer.
+me: { champion: Lulu, hp: 100, mana: 90, gold: 0, summoners: [SummonerFlash, SummonerExhaust], items: [3865] }
+time_limit: 15
+scene:
+  champions:
+    - { champion: Lulu, team: ally, x: 74, y: 90, me: true }
+    - { champion: Caitlyn, team: ally, x: 78, y: 92 }
+    - { champion: Draven, team: enemy, x: 86, y: 92 }
+    - { champion: Leona, team: enemy, x: 84, y: 90 }
+  wards: []
+  objectives: []
+choices:
+  - id: a
+    text: "Reculer avec ton ADC pendant qu'ils passent niveau 2"
+    grade: excellent
+    explanation: >
+      Niveau 2 contre niveau 1, Leona et Draven gagnent tous les combats. Reculer quelques secondes vous fait
+      perdre un peu d'expérience, mais vous évite d'être tués. Vous passerez niveau 2 juste après.
+  - id: b
+    text: "Avancer pour engager avant eux"
+    grade: erreur
+    explanation: >
+      C'est exactement ce que veut Leona : elle passe niveau 2 au milieu du combat et gagne l'échange.
+      Engager avec un niveau de retard est perdant.
+  - id: c
+    text: "Rester au même endroit et soigner ton ADC s'il est touché"
+    grade: correct
+    explanation: >
+      Tu peux limiter les dégâts, mais vous restez à portée de leur engagement niveau 2. Reculer est plus sûr.
+lesson: "Si l'adversaire passe niveau 2 en premier, recule : le premier niveau 2 gagne les combats."

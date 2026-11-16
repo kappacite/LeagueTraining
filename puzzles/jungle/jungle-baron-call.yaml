@@ -1,0 +1,46 @@
+id: jungle-baron-call
+type: decision
+role: jungle
+difficulty: difficile
+patch: "16.22.1"
+title: "Kill sur leur ADC à 28 minutes"
+context: >
+  28:10. Ton équipe vient de tuer l'ADC adverse au mid. Il réapparaît dans 45 s. Le Baron est en vie.
+  Le jungler adverse a 1 Châtiment et il a été vu près du Baron il y a 8 s. Les quatre autres ennemis
+  sont à 50-70 % de PV, ton équipe est à 60-80 %.
+me: { champion: Nocturne, hp: 75, mana: 60, gold: 300, summoners: [SummonerFlash, SummonerSmite], items: [6610, 3071, 3047] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: Nocturne, team: ally, x: 44, y: 46, me: true }
+    - { champion: Gnar, team: ally, x: 40, y: 52 }
+    - { champion: Orianna, team: ally, x: 46, y: 52 }
+    - { champion: Caitlyn, team: ally, x: 42, y: 56 }
+    - { champion: Lulu, team: ally, x: 44, y: 54 }
+    - { champion: Graves, team: enemy, x: 36, y: 28, last_seen: 8 }
+    - { champion: Sion, team: enemy, x: 58, y: 34 }
+    - { champion: Azir, team: enemy, x: 62, y: 38 }
+    - { champion: Rell, team: enemy, x: 60, y: 36 }
+  wards: [ { team: ally, x: 40, y: 32 } ]
+  objectives: [ { type: baron } ]
+choices:
+  - id: a
+    text: "Lancer le Baron immédiatement"
+    grade: correct
+    explanation: >
+      Le 5 contre 4 est là, mais leur jungler est collé au Baron avec Châtiment et les quatre ennemis peuvent
+      venir te prendre de dos. Le Baron est jouable, mais sans contrôle de la zone c'est un pari.
+  - id: b
+    text: "Prendre d'abord le contrôle de la rivière : chasser Graves et nettoyer la vision, puis faire le Baron"
+    grade: excellent
+    explanation: >
+      Tu as 45 s. Te placer d'abord autour du Baron force les ennemis à combattre à 4 contre 5 dans ta zone,
+      ou à te laisser le Baron. Tu enlèves aussi le risque de vol par leur jungler. C'est la façon sûre de
+      transformer le kill en Baron.
+  - id: c
+    text: "Pousser la tour mid"
+    grade: erreur
+    explanation: >
+      Une tour contre la possibilité d'un Baron à 5 contre 4 : l'échange est mauvais. À 28 minutes, le Baron
+      est l'objectif qui décide de la partie.
+lesson: "Avant de lancer le Baron, contrôle la zone autour : vision et position avant les dégâts."

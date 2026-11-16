@@ -1,0 +1,40 @@
+id: adc-antiheal-soraka
+type: itemization
+role: adc
+difficulty: facile
+patch: "16.22.1"
+title: "Soraka et Aatrox en face"
+context: >
+  Tu es Jinx. Soraka soigne son équipe en permanence et Aatrox se régénère à chaque fight.
+  Tu reviens en base avec 1300 PO, ton premier objet est terminé.
+me: { champion: Jinx, level: 10, gold: 1300, items: [1055, 3006, 3031] }
+allies: [Malphite, Viego, Ahri, Thresh]
+enemies:
+  - { champion: Aatrox, items: [3071] }
+  - { champion: Vi }
+  - { champion: Syndra }
+  - { champion: Kaisa }
+  - { champion: Soraka, items: [3107] }
+choices:
+  - id: a
+    text: "Marque du bourreau"
+    items: [3123]
+    grade: excellent
+    explanation: >
+      L'anti-soin sur tes attaques, pour pas cher. Contre Soraka et Aatrox, réduire les soins vaut plus que
+      n'importe quelle stat de dégâts. Elle évolue plus tard en Rappel mortel.
+  - id: b
+    text: "BF Glaive pour plus de dégâts"
+    items: [1038]
+    grade: erreur
+    explanation: >
+      Plus de dégâts, mais Soraka annule une grande partie de ce que tu fais. Sans anti-soin, les fights
+      contre cette équipe durent trop longtemps.
+  - id: c
+    text: "Cape d'agilité"
+    items: [1018]
+    grade: correct
+    explanation: >
+      Un composant utile pour la suite, mais sans effet sur les soins. Tu repousses le problème au lieu de le
+      régler.
+lesson: "Contre plusieurs sources de soins, l'anti-soin arrive tôt dans ta build."

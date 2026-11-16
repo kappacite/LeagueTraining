@@ -1,0 +1,39 @@
+id: adc-back-timing
+type: decision
+role: adc
+difficulty: moyen
+patch: "16.22.1"
+title: "1300 PO en poche"
+context: >
+  8:50. Tu as 1300 PO, de quoi acheter un gros composant. Ta vague et la vague adverse sont au milieu de
+  la lane, une grosse vague adverse (avec canon) arrive dans 10 s. Ton support est à côté de toi.
+me: { champion: Ezreal, hp: 60, mana: 30, gold: 1300, summoners: [SummonerFlash, SummonerHeal], items: [1055, 3070] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Ezreal, team: ally, x: 74, y: 92, me: true }
+    - { champion: Lulu, team: ally, x: 72, y: 90 }
+    - { champion: Jinx, team: enemy, x: 84, y: 92 }
+    - { champion: Thresh, team: enemy, x: 84, y: 88 }
+  wards: [ { team: ally, x: 72, y: 78 } ]
+  objectives: [ { type: dragon, spawn_in: 150 } ]
+choices:
+  - id: a
+    text: "Back tout de suite"
+    grade: correct
+    explanation: >
+      Tu dépenses ton or, mais la grosse vague adverse va arriver à ta tour sans toi : tu perds des sbires
+      et peut-être une plaque. Le timing n'est pas idéal.
+  - id: b
+    text: "Pousser la vague actuelle vers la tour adverse avec ton support, puis back"
+    grade: excellent
+    explanation: >
+      Une vague poussée dans la tour adverse te laisse le temps de back sans rien perdre : c'est l'adversaire
+      qui devra la farmer sous sa tour. Tu reviens avec ton objet en même temps que la vague suivante.
+  - id: c
+    text: "Rester jusqu'à avoir 2000 PO"
+    grade: erreur
+    explanation: >
+      À 60 % de PV et 30 % de mana, tu es en position de faiblesse face à Thresh. Garder l'or sur toi ne te
+      donne aucune puissance : un composant acheté maintenant compte tout de suite.
+lesson: "Le bon moment pour back : juste après avoir poussé ta vague dans la tour adverse."

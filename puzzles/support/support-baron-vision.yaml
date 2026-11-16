@@ -1,0 +1,46 @@
+id: support-baron-vision
+type: decision
+role: support
+difficulty: difficile
+patch: "16.22.1"
+title: "Le Baron dans 70 secondes"
+context: >
+  23:50. Le Baron apparaît dans 70 s. Ton équipe a la priorité sur les vagues mid et bot.
+  Les ennemis ont posé deux balises autour du Baron, que tu vois grâce à ta balise de contrôle.
+  Tu as ton Balayeur (l'objet qui détecte les balises) et une balise de contrôle.
+me: { champion: Nautilus, hp: 100, mana: 80, gold: 100, summoners: [SummonerFlash, SummonerDot], items: [3877, 3047, 3190, 2055] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: Nautilus, team: ally, x: 44, y: 46, me: true }
+    - { champion: Viego, team: ally, x: 40, y: 50 }
+    - { champion: Ahri, team: ally, x: 48, y: 50 }
+    - { champion: Jinx, team: ally, x: 80, y: 88 }
+    - { champion: Ornn, team: ally, x: 10, y: 30 }
+    - { champion: LeeSin, team: enemy, x: 60, y: 26, last_seen: 20 }
+  wards:
+    - { team: enemy, x: 32, y: 28 }
+    - { team: enemy, x: 38, y: 22 }
+    - { team: ally, x: 42, y: 38 }
+  objectives: [ { type: baron, spawn_in: 70 } ]
+choices:
+  - id: a
+    text: "Attendre l'apparition du Baron près de ta balise"
+    grade: erreur
+    explanation: >
+      Les ennemis verront tout ce que vous faites au Baron grâce à leurs balises. Vous perdez l'avantage de
+      la surprise et ils pourront préparer leur engagement.
+  - id: b
+    text: "Détruire leurs deux balises et poser ta balise de contrôle au-dessus du Baron, avec ton jungler"
+    grade: excellent
+    explanation: >
+      Tu as la priorité sur les vagues et 70 s devant toi : c'est le moment d'enlever leur vision et de poser
+      la tienne. Ils devront entrer dans le noir pour contester, alors que ton équipe les verra arriver.
+      Ton jungler t'accompagne pour te protéger de Lee Sin.
+  - id: c
+    text: "Aller seul détruire les balises, ton équipe farme"
+    grade: correct
+    explanation: >
+      Le bon objectif, mais seul dans la zone du Baron tu es une cible facile pour Lee Sin. Le contrôle de la
+      vision se fait en groupe.
+lesson: "Avant un objectif, enlève la vision ennemie et pose la tienne, en groupe."

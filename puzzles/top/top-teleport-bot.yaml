@@ -1,0 +1,47 @@
+id: top-teleport-bot
+type: decision
+role: top
+difficulty: moyen
+patch: "16.22.1"
+title: "Un fight démarre au drake"
+context: >
+  15:30. Ton équipe se bat au drake, à 4 contre 4 : le top adverse est en lane face à toi, sans téléportation.
+  Ta vague vient de s'écraser sur sa tour, il a 50 % de PV. Tu as la téléportation, et une balise de ton
+  support est posée derrière le drake.
+me: { champion: Ornn, hp: 80, mana: 60, gold: 600, summoners: [SummonerFlash, SummonerTeleport], items: [3047, 3068] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Ornn, team: ally, x: 9, y: 30, me: true }
+    - { champion: Renekton, team: enemy, x: 10, y: 18 }
+    - { champion: Jinx, team: ally, x: 64, y: 78 }
+    - { champion: Thresh, team: ally, x: 62, y: 74 }
+    - { champion: Viego, team: ally, x: 60, y: 68 }
+    - { champion: Ahri, team: ally, x: 58, y: 64 }
+    - { champion: Kaisa, team: enemy, x: 72, y: 66 }
+    - { champion: Nautilus, team: enemy, x: 70, y: 64 }
+    - { champion: Khazix, team: enemy, x: 74, y: 70 }
+    - { champion: Syndra, team: enemy, x: 72, y: 60 }
+  wards: [ { team: ally, x: 74, y: 76 } ]
+  objectives: [ { type: dragon } ]
+choices:
+  - id: a
+    text: "Téléporter sur la balise derrière le drake"
+    grade: excellent
+    explanation: >
+      Ta vague est écrasée sur sa tour, donc tu ne perds presque rien en partant. Le top adverse n'a pas de
+      téléportation : tu transformes un 4 contre 4 en 5 contre 4, et la balise derrière le drake te fait
+      arriver dans le dos des ennemis, sur leur carry. C'est le meilleur usage possible de la téléportation.
+  - id: b
+    text: "Rester et taper la tour pendant que l'équipe se bat"
+    grade: erreur
+    explanation: >
+      Quelques golds de plaques contre un drake et un fight à 5 contre 4 : l'échange est très mauvais.
+      Si ton équipe perd, tu auras une plaque et l'adversaire aura le drake et des kills.
+  - id: c
+    text: "Téléporter sur la tour bot, plus sûre"
+    grade: correct
+    explanation: >
+      Tu rejoins le fight, mais par devant et de plus loin : tu arrives plus tard et tu engages de face.
+      La balise derrière le drake te donne un bien meilleur angle.
+lesson: "La téléportation la plus forte arrive dans le dos de l'ennemi, quand ta vague ne craint rien."

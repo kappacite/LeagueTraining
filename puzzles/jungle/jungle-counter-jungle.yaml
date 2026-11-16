@@ -1,0 +1,41 @@
+id: jungle-counter-jungle
+type: decision
+role: jungle
+difficulty: moyen
+patch: "16.22.1"
+title: "Il se montre en haut"
+context: >
+  7:50. Le jungler adverse vient de ganker top, sans succès, et il est encore là-bas.
+  Tu es à ton buff bleu. Ton mid et ton bot ont la priorité sur leur lane (vagues poussées).
+  Ses camps du côté bot de la carte sont réapparus.
+me: { champion: Graves, hp: 90, mana: 80, gold: 700, summoners: [SummonerFlash, SummonerSmite], items: [1036, 1036] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Graves, team: ally, x: 25, y: 47, me: true }
+    - { champion: Ahri, team: ally, x: 54, y: 46 }
+    - { champion: Jinx, team: ally, x: 86, y: 88 }
+    - { champion: Thresh, team: ally, x: 84, y: 86 }
+    - { champion: Elise, team: enemy, x: 12, y: 14 }
+  wards: [ { team: ally, x: 62, y: 60 } ]
+  objectives: [ { type: dragon, spawn_in: 70 } ]
+choices:
+  - id: a
+    text: "Envahir sa jungle côté bot et voler ses camps"
+    grade: excellent
+    explanation: >
+      Il est loin en haut, tes lanes mid et bot ont la priorité et peuvent venir t'aider : c'est la définition
+      d'une invasion sûre. Tu prends son or et son expérience, et tu te places près du drake qui arrive.
+  - id: b
+    text: "Aller top pour un contre-gank"
+    grade: correct
+    explanation: >
+      Possible si tu arrives à temps, mais son gank a déjà échoué et il va repartir. Tu risques d'arriver trop tard
+      et de laisser passer l'invasion, qui est un gain certain.
+  - id: c
+    text: "Faire ta propre jungle côté top"
+    grade: erreur
+    explanation: >
+      Tu te rapproches du jungler adverse au lieu de profiter de son absence, et tu t'éloignes du drake.
+      Tu ne gagnes rien de plus que d'habitude.
+lesson: "Quand le jungler adverse se montre d'un côté, joue de l'autre côté de la carte, avec tes lanes qui ont la priorité."

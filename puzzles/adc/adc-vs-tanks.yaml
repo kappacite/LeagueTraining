@@ -1,0 +1,40 @@
+id: adc-vs-tanks
+type: itemization
+role: adc
+difficulty: difficile
+patch: "16.22.1"
+title: "Trois tanks en face"
+context: >
+  Tu es Caitlyn avec 2 objets. L'équipe adverse joue trois tanks avec beaucoup de PV et d'armure,
+  tes coups critiques ne suffisent plus. Tu as 2900 PO.
+me: { champion: Caitlyn, level: 14, gold: 2900, items: [3006, 3508, 3031] }
+allies: [Gnar, Vi, Orianna, Lulu]
+enemies:
+  - { champion: Ornn, items: [3068, 3075] }
+  - { champion: Sejuani, items: [3068, 3110] }
+  - { champion: Azir }
+  - { champion: Ezreal }
+  - { champion: Braum, items: [3190, 3143] }
+choices:
+  - id: a
+    text: "Dernier souffle, vers les Salutations de Dominik"
+    items: [3035]
+    grade: excellent
+    explanation: >
+      Les Salutations de Dominik donnent beaucoup de pénétration d'armure en pourcentage : plus la cible a
+      d'armure, plus l'objet est rentable. Contre trois tanks, c'est l'objet qui te permet de les faire tomber.
+  - id: b
+    text: "BF Glaive vers un objet de dégâts bruts"
+    items: [1038]
+    grade: correct
+    explanation: >
+      Plus de dégâts bruts aident un peu, mais l'armure des tanks en absorbe une grande partie.
+      La pénétration est plus rentable contre ces cibles.
+  - id: c
+    text: "Ange gardien"
+    items: [3026]
+    grade: erreur
+    explanation: >
+      Les tanks ne sont pas une menace pour ta survie, ils sont une menace pour tes dégâts. Il te faut de la
+      pénétration, pas de la défense.
+lesson: "Contre plusieurs tanks, achète de la pénétration d'armure avant tes autres objets de dégâts."

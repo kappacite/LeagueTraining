@@ -1,0 +1,41 @@
+id: jungle-drake-after-fight
+type: decision
+role: jungle
+difficulty: facile
+patch: "16.22.1"
+title: "Fight gagné en bot"
+context: >
+  11:20. Ton équipe vient de tuer l'ADC et le support adverses en bot lane. Le drake est en vie.
+  Le mid adverse est à 60 % PV au mid, le jungler adverse a été vu top il y a 20 s.
+  Ton ADC et ton support sont à moitié de leurs PV.
+me: { champion: Viego, hp: 70, mana: 100, gold: 900, summoners: [SummonerFlash, SummonerSmite], items: [6610] }
+time_limit: 15
+scene:
+  champions:
+    - { champion: Viego, team: ally, x: 74, y: 84, me: true }
+    - { champion: Jinx, team: ally, x: 78, y: 88 }
+    - { champion: Thresh, team: ally, x: 76, y: 86 }
+    - { champion: Syndra, team: enemy, x: 52, y: 48 }
+    - { champion: LeeSin, team: enemy, x: 20, y: 14, last_seen: 20 }
+  wards: []
+  objectives: [ { type: dragon } ]
+choices:
+  - id: a
+    text: "Aller au drake avec l'ADC et le support"
+    grade: excellent
+    explanation: >
+      Deux ennemis sont morts, le jungler adverse est de l'autre côté de la carte : personne ne peut contester.
+      Un fight gagné doit devenir un objectif, sinon l'avantage disparaît dès que les ennemis réapparaissent.
+  - id: b
+    text: "Farmer ton camp de jungle le plus proche"
+    grade: erreur
+    explanation: >
+      Tu laisses passer la fenêtre de 30 à 40 s où le drake est gratuit. Un camp vaut beaucoup moins
+      qu'un drake, et le drake donne un bonus permanent à toute l'équipe.
+  - id: c
+    text: "Pousser la tour bot avec l'ADC et le support"
+    grade: correct
+    explanation: >
+      C'est un vrai gain, mais le drake rapporte plus et la tour sera encore là après.
+      Le bon enchaînement serait : drake d'abord, plaques si le temps le permet.
+lesson: "Un fight gagné près d'un objectif doit devenir cet objectif."

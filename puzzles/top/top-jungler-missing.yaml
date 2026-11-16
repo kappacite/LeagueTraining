@@ -1,0 +1,40 @@
+id: top-jungler-missing
+type: decision
+role: top
+difficulty: facile
+patch: "16.22.1"
+title: "Le jungler adverse a disparu"
+context: >
+  6:10. Tu as poussé ta vague jusqu'à la tour adverse. Ton adversaire vient de mourir à ta place
+  il y a 20 s, tu n'as pas de balise dans la rivière. Le jungler adverse a été vu à son buff rouge,
+  côté top, il y a 15 s.
+me: { champion: Darius, hp: 55, mana: 40, gold: 1150, summoners: [SummonerFlash, SummonerTeleport], items: [1055, 2003] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Darius, team: ally, x: 22, y: 8, me: true }
+    - { champion: LeeSin, team: enemy, x: 48, y: 26, last_seen: 15 }
+    - { champion: Viego, team: ally, x: 70, y: 82 }
+  wards: []
+  objectives: [ { type: herald, spawn_in: 110 } ]
+choices:
+  - id: a
+    text: "Rester sous la tour adverse pour prendre la vague suivante"
+    grade: erreur
+    explanation: >
+      Le jungler adverse est à 15 s de toi, tu es à moitié de tes PV et sans vision. C'est exactement
+      la situation où un jungler vient chercher un kill gratuit. Ta vague est déjà poussée : rester n'apporte
+      presque rien, et mourir donne de l'or et du temps à ton adversaire.
+  - id: b
+    text: "Back maintenant pour dépenser tes 1150 PO"
+    grade: excellent
+    explanation: >
+      Ta vague va s'écraser sur la tour adverse pendant que tu backs : tu ne perds presque pas d'or.
+      Tu reviens avec un objet, des PV pleins, et tu ne t'exposes pas à un jungler que tu ne vois pas.
+  - id: c
+    text: "Reculer vers ta tour et attendre la vague là-bas"
+    grade: correct
+    explanation: >
+      Plus sûr que de rester, mais tu restes à 55 % de PV avec de l'or non dépensé. Le back est meilleur :
+      ta vague poussée te donne justement le temps de le faire sans rien perdre.
+lesson: "Vague poussée, jungler adverse proche et pas de vision : c'est le moment de back, pas de rester."

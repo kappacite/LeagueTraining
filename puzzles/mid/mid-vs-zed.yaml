@@ -1,0 +1,40 @@
+id: mid-vs-zed
+type: itemization
+role: mid
+difficulty: facile
+patch: "16.22.1"
+title: "Zed te tue à chaque ultime"
+context: >
+  Tu es Syndra. Zed te tue à chaque fois qu'il utilise son ultime sur toi.
+  Tu reviens en base avec 1650 PO.
+me: { champion: Syndra, level: 10, gold: 1650, items: [1056, 6655, 3020] }
+allies: [Ornn, Viego, Jinx, Thresh]
+enemies:
+  - { champion: Darius }
+  - { champion: LeeSin }
+  - { champion: Zed, items: [3142] }
+  - { champion: Kaisa }
+  - { champion: Nautilus }
+choices:
+  - id: a
+    text: "Protège-bras du savant, vers le Sablier de Zhonya"
+    items: [2420]
+    grade: excellent
+    explanation: >
+      Le Protège-bras du savant a déjà l'actif qui te rend invincible quelques secondes : tu l'actives quand
+      l'ultime de Zed va exploser, et ses dégâts sont perdus. Il évolue ensuite en Sablier de Zhonya. C'est l'objet de référence pour un mage contre un assassin AD.
+  - id: b
+    text: "Baguette trop grosse vers la Coiffe de Rabadon"
+    items: [1058]
+    grade: erreur
+    explanation: >
+      Plus de dégâts ne t'aident pas si Zed te tue avant que tu puisses lancer tes sorts. Tu as besoin de
+      survivre à son engagement d'abord.
+  - id: c
+    text: "Armure d'étoffe seule, pour plus tard"
+    items: [1029]
+    grade: correct
+    explanation: >
+      Un peu d'armure aide déjà contre Zed, mais sans l'actif d'invincibilité son ultime te tue quand même.
+      Avec 1650 PO, tu peux acheter le composant qui change vraiment le duel.
+lesson: "Contre un assassin AD qui t'élimine en un combo, achète le Sablier de Zhonya."

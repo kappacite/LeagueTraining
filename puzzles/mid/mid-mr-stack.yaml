@@ -1,0 +1,40 @@
+id: mid-mr-stack
+type: itemization
+role: mid
+difficulty: moyen
+patch: "16.22.1"
+title: "Ils achètent de la résistance magique"
+context: >
+  Tu es Viktor. Trois ennemis ont acheté de la résistance magique contre toi, tes sorts font beaucoup
+  moins de dégâts qu'au début de la partie. Tu as 1400 PO, ton 2e objet est terminé.
+me: { champion: Viktor, level: 13, gold: 1400, items: [6655, 3020, 3089] }
+allies: [Ornn, Vi, Ezreal, Lulu]
+enemies:
+  - { champion: Mordekaiser, items: [3065] }
+  - { champion: Sejuani, items: [4401] }
+  - { champion: Galio, items: [3102] }
+  - { champion: Jinx }
+  - { champion: Braum }
+choices:
+  - id: a
+    text: "Baguette explosive vers le Bâton du vide"
+    items: [1026]
+    grade: excellent
+    explanation: >
+      Le Bâton du vide donne de la pénétration magique en pourcentage : il est d'autant plus efficace que la
+      cible a beaucoup de résistance magique. Contre trois ennemis qui en empilent, c'est l'objet qui rend tes
+      sorts à nouveau dangereux.
+  - id: b
+    text: "Chapitre perdu pour plus de mana"
+    items: [3802]
+    grade: erreur
+    explanation: >
+      Le mana n'est pas ton problème : tes sorts touchent, mais ils sont absorbés par la résistance magique.
+  - id: c
+    text: "Baguette trop grosse pour plus de puissance"
+    items: [1058]
+    grade: correct
+    explanation: >
+      Plus de puissance augmente un peu tes dégâts, mais beaucoup moins qu'ignorer une partie de la résistance
+      magique ennemie. La pénétration est la priorité ici.
+lesson: "Quand l'ennemi empile la résistance magique, la pénétration magique vaut plus que la puissance."

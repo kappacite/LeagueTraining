@@ -1,0 +1,42 @@
+id: support-roam-mid
+type: decision
+role: support
+difficulty: moyen
+patch: "16.22.1"
+title: "Retour de base à 8 minutes"
+context: >
+  8:10. Tu reviens de la base avec une balise de contrôle. Ta vague bot est poussée vers la tour adverse,
+  ton ADC peut la farmer sous sa tour en sécurité. Au mid, Syndra a poussé sa vague jusqu'à ta tour
+  et n'a pas sa Saut éclair.
+me: { champion: Rakan, hp: 100, mana: 100, gold: 150, summoners: [SummonerFlash, SummonerDot], items: [3877, 3158, 2055] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Rakan, team: ally, x: 32, y: 72, me: true }
+    - { champion: Ahri, team: ally, x: 42, y: 60 }
+    - { champion: Syndra, team: enemy, x: 46, y: 54 }
+    - { champion: Jinx, team: ally, x: 78, y: 92 }
+    - { champion: Kaisa, team: enemy, x: 90, y: 80 }
+    - { champion: Nautilus, team: enemy, x: 88, y: 82 }
+  wards: []
+  objectives: []
+choices:
+  - id: a
+    text: "Passer par le mid pour attaquer Syndra avec ton mid laner"
+    grade: excellent
+    explanation: >
+      Ton bot ne risque rien (vague poussée, sous la tour adverse), et ton chemin vers le bot passe juste
+      à côté du mid. Syndra est poussée et sans Saut éclair : c'est une cible facile pour un engagement de Rakan.
+  - id: b
+    text: "Retourner directement en bot"
+    grade: correct
+    explanation: >
+      Sûr, mais tu laisses passer une occasion presque gratuite sur ton chemin. Ton ADC n'a pas besoin de toi
+      pendant les 20 prochaines secondes.
+  - id: c
+    text: "Aller warder la jungle adverse côté top"
+    grade: erreur
+    explanation: >
+      C'est loin de ton ADC et de toute action utile. La vision est importante, mais ici une occasion de
+      kill est sur ton chemin.
+lesson: "Après un back, regarde si une occasion se présente sur ton chemin avant de retourner en lane."

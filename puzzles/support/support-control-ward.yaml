@@ -1,0 +1,37 @@
+id: support-control-ward
+type: decision
+role: support
+difficulty: facile
+patch: "16.22.1"
+title: "Où poser ta balise de contrôle ?"
+context: >
+  12:20. Le drake apparaît dans 60 s. Ta vague bot est poussée vers la tour adverse.
+  Tu as une balise de contrôle dans ton inventaire et ton ADC est à côté de toi.
+me: { champion: Thresh, hp: 90, mana: 70, gold: 300, summoners: [SummonerFlash, SummonerExhaust], items: [3877, 2055] }
+time_limit: 15
+scene:
+  champions:
+    - { champion: Thresh, team: ally, x: 80, y: 88, me: true }
+    - { champion: Jinx, team: ally, x: 82, y: 90 }
+    - { champion: Kaisa, team: enemy, x: 90, y: 76 }
+    - { champion: Nautilus, team: enemy, x: 90, y: 74 }
+  wards: [ { team: ally, x: 62, y: 60 } ]
+  objectives: [ { type: dragon, spawn_in: 60 } ]
+choices:
+  - id: a
+    text: "Dans le buisson de la rivière, juste à côté du drake"
+    grade: excellent
+    explanation: >
+      Une balise de contrôle révèle et désactive les balises ennemies autour d'elle. Dans le buisson près du drake,
+      elle te donne la vision de la zone du combat et empêche l'adversaire de la voir.
+  - id: b
+    text: "Dans le buisson de ta lane bot"
+    grade: erreur
+    explanation: >
+      Ce buisson n'a presque aucun intérêt pour le drake. La balise de contrôle doit servir l'objectif à venir.
+  - id: c
+    text: "Dans ta propre jungle, près de ton buff rouge"
+    grade: correct
+    explanation: >
+      Ça protège ta jungle, mais c'est loin du drake. La balise est plus utile là où le combat va avoir lieu.
+lesson: "Pose ta balise de contrôle là où le prochain objectif va se jouer."

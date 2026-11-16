@@ -1,0 +1,37 @@
+id: mid-missing-no-vision
+type: decision
+role: mid
+difficulty: facile
+patch: "16.22.1"
+title: "Ton adversaire a disparu"
+context: >
+  7:00. Ta vague est poussée jusqu'à la tour adverse. Ton adversaire Zed n'est plus visible depuis 5 s,
+  et le jungler adverse n'a pas été vu depuis 1 minute. Tu n'as aucune balise sur les côtés de ta lane.
+me: { champion: Lux, hp: 65, mana: 40, gold: 1300, summoners: [SummonerFlash, SummonerDot], items: [1056, 3802] }
+time_limit: 15
+scene:
+  champions:
+    - { champion: Lux, team: ally, x: 57, y: 44, me: true }
+    - { champion: Zed, team: enemy, x: 64, y: 36, last_seen: 5 }
+  wards: []
+  objectives: []
+choices:
+  - id: a
+    text: "Rester et farmer la vague suivante à la tour adverse"
+    grade: erreur
+    explanation: >
+      Zed et son jungler peuvent tous les deux arriver par les côtés, que tu ne vois pas. Lux, avec 65 % de PV
+      et peu de mana, meurt très vite face à un Zed. Rester loin de ta tour sans vision, c'est un pari perdant.
+  - id: b
+    text: "Back maintenant et revenir avec un objet et une balise"
+    grade: excellent
+    explanation: >
+      Ta vague est poussée, donc le back ne coûte presque rien. Tu dépenses 1300 PO, tu récupères mana et PV,
+      et tu ne restes pas exposée à deux ennemis invisibles.
+  - id: c
+    text: "Partir en roam vers le bot"
+    grade: correct
+    explanation: >
+      L'idée de jouer ta vague poussée est bonne, mais tu pars avec 40 % de mana et 1300 PO en poche,
+      sans savoir où sont Zed et le jungler. Le back est plus solide.
+lesson: "Ennemis invisibles et pas de vision : ne reste pas loin de ta tour."

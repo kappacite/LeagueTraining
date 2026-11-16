@@ -1,0 +1,47 @@
+id: adc-teamfight-target
+type: decision
+role: adc
+difficulty: difficile
+patch: "16.22.1"
+title: "Qui frapper ?"
+context: >
+  27:30. Le fight démarre devant le Baron. Ornn, le tank adverse, est au contact de ton équipe,
+  à portée d'attaque. Leur ADC Jinx est derrière Ornn, à la limite de ta portée. Kha'Zix n'est pas
+  visible depuis 6 s. Tu es à pleine santé et tu as tes sorts d'invocateur.
+me: { champion: Jhin, hp: 100, mana: 90, gold: 200, summoners: [SummonerFlash, SummonerHeal], items: [3009, 3094, 3031, 3036] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Jhin, team: ally, x: 46, y: 44, me: true }
+    - { champion: Sejuani, team: ally, x: 38, y: 36 }
+    - { champion: Ahri, team: ally, x: 42, y: 40 }
+    - { champion: Braum, team: ally, x: 44, y: 42 }
+    - { champion: Renekton, team: ally, x: 30, y: 26 }
+    - { champion: Ornn, team: enemy, x: 36, y: 32 }
+    - { champion: Jinx, team: enemy, x: 30, y: 30 }
+    - { champion: Lux, team: enemy, x: 28, y: 34 }
+    - { champion: Rell, team: enemy, x: 34, y: 34 }
+    - { champion: Khazix, team: enemy, x: 52, y: 32, last_seen: 6 }
+  wards: [ { team: ally, x: 36, y: 22 } ]
+  objectives: [ { type: baron } ]
+choices:
+  - id: a
+    text: "Avancer pour atteindre Jinx"
+    grade: erreur
+    explanation: >
+      Pour atteindre Jinx, tu dois passer Ornn et Rell, et Kha'Zix est invisible sur ton côté. Tu te mets
+      exactement là où l'assassin t'attend.
+  - id: b
+    text: "Frapper la cible la plus proche (Ornn) en restant derrière ton équipe"
+    grade: excellent
+    explanation: >
+      En teamfight, l'ADC frappe ce qui est à portée en restant en sécurité. Tu infliges des dégâts en continu,
+      tu restes protégé par Braum, et tu gardes tes sorts d'invocateur pour Kha'Zix quand il apparaîtra.
+      Jinx viendra à ta portée quand Ornn sera tombé.
+  - id: c
+    text: "Reculer et attendre que Kha'Zix se montre"
+    grade: correct
+    explanation: >
+      Prudent, mais ton équipe se bat sans tes dégâts. Tu peux frapper Ornn depuis une position sûre
+      tout en surveillant Kha'Zix.
+lesson: "En teamfight, frappe la cible la plus proche depuis une position sûre ; la cible idéale viendra à toi."

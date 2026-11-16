@@ -1,0 +1,40 @@
+id: top-ap-heavy
+type: itemization
+role: top
+difficulty: moyen
+patch: "16.22.1"
+title: "Quatre sources de dégâts magiques"
+context: >
+  Tu es Garen, l'équipe adverse est presque entièrement AP. Leur mid Syndra et leur top Teemo
+  te tuent à chaque fight. Tu as 1300 PO.
+me: { champion: Garen, level: 11, gold: 1300, items: [3006, 6610] }
+allies: [Vi, Orianna, Caitlyn, Leona]
+enemies:
+  - { champion: Teemo, items: [6653] }
+  - { champion: Elise }
+  - { champion: Syndra, items: [6655] }
+  - { champion: Ezreal }
+  - { champion: Lux }
+choices:
+  - id: a
+    text: "Sandales de Mercure (à la place des Jambières du berzerker)"
+    items: [3111]
+    grade: correct
+    explanation: >
+      Résistance magique et réduction de la durée des contrôles, utile contre Lux et Syndra. Mais revendre
+      tes bottes te coûte de l'or : c'est bien, pas optimal.
+  - id: b
+    text: "Manteau de Négatron, vers la Force de la nature"
+    items: [1057]
+    grade: excellent
+    explanation: >
+      Tu commences l'objet de résistance magique le plus adapté contre plusieurs sources de dégâts magiques
+      soutenus. Garen doit aller au contact : il doit survivre aux sorts pour y arriver.
+  - id: c
+    text: "Pioche pour plus de dégâts"
+    items: [1037]
+    grade: erreur
+    explanation: >
+      Plus de dégâts ne servent à rien si tu meurs avant d'atteindre les carrys. Avec 4 champions AP,
+      chaque point de résistance magique vaut plus que des dégâts.
+lesson: "Quand une équipe est presque entièrement AP, la résistance magique passe avant les dégâts pour un bruiser."

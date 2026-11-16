@@ -1,0 +1,40 @@
+id: adc-vs-assassins
+type: itemization
+role: adc
+difficulty: moyen
+patch: "16.22.1"
+title: "Kha'Zix et Zed te visent"
+context: >
+  Tu es Kai'Sa. Kha'Zix et Zed te tuent en un instant dès le début de chaque fight. Tu as 2 objets
+  et 3300 PO.
+me: { champion: Kaisa, level: 14, gold: 3300, items: [3006, 3124, 3115] }
+allies: [Ornn, Sejuani, Orianna, Braum]
+enemies:
+  - { champion: Renekton }
+  - { champion: Khazix, items: [3142, 6694] }
+  - { champion: Zed, items: [3142, 6692] }
+  - { champion: Jhin }
+  - { champion: Pyke }
+choices:
+  - id: a
+    text: "Sablier de Zhonya"
+    items: [3157]
+    grade: excellent
+    explanation: >
+      Kai'Sa utilise très bien la puissance, et le Sablier de Zhonya te rend invincible quelques secondes.
+      Les assassins dépensent leur combo dans le vide, et ton équipe a le temps de les punir.
+  - id: b
+    text: "Lame d'infini"
+    items: [3031]
+    grade: erreur
+    explanation: >
+      Plus de dégâts, mais tu meurs avant de les utiliser. Contre deux assassins AD, survivre à leur engagement
+      passe en premier.
+  - id: c
+    text: "Ange gardien"
+    items: [3026]
+    grade: correct
+    explanation: >
+      L'Ange gardien te fait revivre une fois, ce qui protège contre un assassin. Mais les assassins peuvent
+      attendre ta résurrection, et l'objet est moins adapté à la build de Kai'Sa que le Sablier.
+lesson: "Contre des assassins qui ciblent ton carry, la défense active compte plus que les dégâts."

@@ -1,0 +1,40 @@
+id: support-enchanter-cc
+type: itemization
+role: support
+difficulty: moyen
+patch: "16.22.1"
+title: "Ton ADC se fait toujours attraper"
+context: >
+  Tu es Lulu. L'équipe adverse a énormément de contrôles (étourdissements, immobilisations) :
+  ton ADC Jinx meurt dès qu'il se fait attraper par Leona ou Lissandra. Tu as 2400 PO.
+me: { champion: Lulu, level: 12, gold: 2400, items: [3877, 3158, 6617] }
+allies: [Ornn, Viego, Ahri, Jinx]
+enemies:
+  - { champion: Malphite }
+  - { champion: Sejuani }
+  - { champion: Lissandra }
+  - { champion: Kaisa }
+  - { champion: Leona }
+choices:
+  - id: a
+    text: "Bénédiction de Mikael"
+    items: [3222]
+    grade: excellent
+    explanation: >
+      Son actif retire les contrôles d'un allié et le soigne. Contre une équipe pleine d'engagements,
+      c'est ce qui permet à ton ADC de survivre à l'étourdissement qui devait le tuer.
+  - id: b
+    text: "Rédemption"
+    items: [3107]
+    grade: correct
+    explanation: >
+      Un soin de zone utile en teamfight, mais il ne libère pas ton ADC d'un contrôle. Contre cette composition,
+      c'est le contrôle qui le tue, pas les dégâts sur la durée.
+  - id: c
+    text: "Gemme exaltante seule"
+    items: [3067]
+    grade: erreur
+    explanation: >
+      Avec 2400 PO, tu peux acheter un objet complet qui répond au problème. Un simple composant ne change
+      rien aux fights.
+lesson: "Contre beaucoup de contrôles, protège ton carry avec un objet qui les retire."

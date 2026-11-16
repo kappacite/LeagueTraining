@@ -1,0 +1,47 @@
+id: top-split-baron
+type: decision
+role: top
+difficulty: difficile
+patch: "16.22.1"
+title: "Split ou Baron ?"
+context: >
+  26:40. Le Baron apparaît dans 60 s. Tu es en split bot, la tour inhibiteur adverse est à 40 % de PV.
+  Ton équipe se place autour du Baron pour le setup de vision. Le top adverse, Camille, a été vu
+  au mid il y a 5 s, avec son équipe. Tu as la téléportation, une balise de ton équipe est au-dessus du Baron.
+me: { champion: Fiora, hp: 100, mana: 100, gold: 400, summoners: [SummonerFlash, SummonerTeleport], items: [3074, 6610, 3047] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: Fiora, team: ally, x: 84, y: 80, me: true }
+    - { champion: Orianna, team: ally, x: 38, y: 44 }
+    - { champion: Sejuani, team: ally, x: 30, y: 40 }
+    - { champion: Ezreal, team: ally, x: 26, y: 46 }
+    - { champion: Rakan, team: ally, x: 34, y: 38 }
+    - { champion: Camille, team: enemy, x: 52, y: 46, last_seen: 5 }
+    - { champion: Graves, team: enemy, x: 48, y: 28 }
+    - { champion: Azir, team: enemy, x: 56, y: 36 }
+    - { champion: Varus, team: enemy, x: 60, y: 38 }
+    - { champion: Braum, team: enemy, x: 50, y: 34 }
+  wards: [ { team: ally, x: 30, y: 22 }, { team: ally, x: 40, y: 36 } ]
+  objectives: [ { type: baron, spawn_in: 60 } ]
+choices:
+  - id: a
+    text: "Continuer de split jusqu'à ce que quelqu'un vienne te défendre"
+    grade: erreur
+    explanation: >
+      Les 5 ennemis sont du côté du Baron. Si tu restes bot, ton équipe joue le Baron à 4 contre 5, et la tour
+      inhibiteur ne vaut pas un Baron. Le split ne marche que s'il attire quelqu'un : ici, personne ne vient.
+  - id: b
+    text: "Pousser la vague jusqu'à la tour, puis téléporter sur la balise au-dessus du Baron"
+    grade: excellent
+    explanation: >
+      Ta vague poussée va mettre la pression bot pendant le fight, et tu gardes la téléportation pour entrer
+      dans le dos des ennemis au moment de l'engagement. Tu cumules les deux avantages : la pression sur la
+      carte et le 5 contre 5 au Baron, avec un angle de flanc pour Fiora.
+  - id: c
+    text: "Rentrer à pied vers le Baron tout de suite"
+    grade: correct
+    explanation: >
+      Tu évites le 4 contre 5, mais tu traverses la carte en laissant ta vague à l'abandon et sans utiliser
+      la téléportation. Tu arrives de face, et la pression bot disparaît.
+lesson: "Avant un objectif, pousse ta vague puis rejoins avec la téléportation : pression et nombre en même temps."

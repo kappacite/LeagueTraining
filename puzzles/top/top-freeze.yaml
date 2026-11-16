@@ -1,0 +1,39 @@
+id: top-freeze
+type: decision
+role: top
+difficulty: difficile
+patch: "16.22.1"
+title: "Tu viens de tuer ton adversaire"
+context: >
+  8:40. Tu as tué Renekton, il réapparaît dans 20 s. Une vague de 7 sbires adverses (dont un canon) arrive
+  devant ta tour, ta propre vague est presque morte. Le jungler adverse a été vu bot il y a 10 s.
+  Tu as 1600 PO.
+me: { champion: Sett, hp: 45, mana: 100, gold: 1600, summoners: [SummonerFlash, SummonerDot], items: [1055, 3044] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: Sett, team: ally, x: 9, y: 28, me: true }
+    - { champion: Khazix, team: enemy, x: 72, y: 84, last_seen: 10 }
+  wards: [ { team: ally, x: 20, y: 22 } ]
+  objectives: []
+choices:
+  - id: a
+    text: "Back tout de suite, la vague arrivera à ta tour"
+    grade: correct
+    explanation: >
+      Tu dépenses ton or en sécurité, mais la vague adverse va s'écraser sur ta tour et tu perdras des sbires
+      sous la tour. Renekton reviendra sur une vague qui revient vers lui : il récupère son retard.
+  - id: b
+    text: "Pousser la vague adverse et la grande vague jusqu'à sa tour, puis back"
+    grade: excellent
+    explanation: >
+      Avec 20 s de mort de Renekton et son jungler loin bot, tu as le temps de pousser une grosse vague
+      dans sa tour. Il revient en perdant des sbires sous sa tour, tu backs avec un objet et l'avance reste
+      de ton côté. C'est la façon de convertir un kill en avantage durable.
+  - id: c
+    text: "Freeze devant ta tour en attendant Renekton"
+    grade: erreur
+    explanation: >
+      Freeze à 45 % PV avec 1600 PO non dépensés, c'est garder l'avantage sur la vague mais pas sur les objets.
+      Et une vague de 7 sbires avec un canon pousse trop fort pour être gelée proprement.
+lesson: "Après un kill, transforme le temps de mort de l'adversaire en vague poussée puis en back."

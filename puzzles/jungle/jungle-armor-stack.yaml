@@ -1,0 +1,41 @@
+id: jungle-armor-stack
+type: itemization
+role: jungle
+difficulty: moyen
+patch: "16.22.1"
+title: "Leurs tanks empilent l'armure"
+context: >
+  Tu es Vi. Le top et le support adverses empilent l'armure, tes dégâts ne passent plus.
+  Leur ADC est ta cible, mais tu dois souvent frapper un tank pour l'atteindre. Tu as 1400 PO.
+me: { champion: Vi, level: 13, gold: 1400, items: [6610, 3047] }
+allies: [Gnar, Orianna, Caitlyn, Lulu]
+enemies:
+  - { champion: Ornn, items: [3068, 3075] }
+  - { champion: Sejuani }
+  - { champion: Azir }
+  - { champion: Kaisa }
+  - { champion: Leona, items: [3190, 3047] }
+choices:
+  - id: a
+    text: "Marteau de Caulfield, vers un objet de dégâts"
+    items: [3133]
+    grade: erreur
+    explanation: >
+      De la réduction de temps de recharge et des dégâts, mais aucune pénétration d'armure. Contre deux tanks
+      chargés en armure, tes dégâts restent bloqués.
+  - id: b
+    text: "Phage, vers le Couperet noir"
+    items: [3044]
+    grade: excellent
+    explanation: >
+      Le Couperet noir réduit l'armure de ta cible à chaque coup et te donne des PV. Sur un bruiser comme Vi,
+      qui frappe souvent la même cible, c'est l'objet qui rend tes dégâts à nouveau efficaces contre les tanks
+      et aide aussi tes alliés AD.
+  - id: c
+    text: "Cotte de mailles pour survivre"
+    items: [1031]
+    grade: correct
+    explanation: >
+      Survivre a de la valeur, mais le problème est que tu ne fais plus de dégâts. Ce n'est pas l'objet
+      qui change le fight.
+lesson: "Quand l'équipe adverse empile l'armure, prends de la pénétration ou de la réduction d'armure."

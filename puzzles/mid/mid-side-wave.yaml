@@ -1,0 +1,47 @@
+id: mid-side-wave
+type: decision
+role: mid
+difficulty: difficile
+patch: "16.22.1"
+title: "Une grosse vague arrive bot"
+context: >
+  24:00. Le Baron apparaît dans 90 s. Une grosse vague de sbires arrive vers ta tour bot (2e tour),
+  personne n'est en bot. Les cinq ennemis ont été vus autour du mid il y a 10 s.
+  Ton équipe est au mid, regroupée.
+me: { champion: TwistedFate, hp: 100, mana: 100, gold: 500, summoners: [SummonerFlash, SummonerTeleport], items: [6655, 3020, 3089] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: TwistedFate, team: ally, x: 40, y: 58, me: true }
+    - { champion: Ornn, team: ally, x: 42, y: 56 }
+    - { champion: Vi, team: ally, x: 38, y: 54 }
+    - { champion: Ezreal, team: ally, x: 36, y: 60 }
+    - { champion: Lulu, team: ally, x: 38, y: 62 }
+    - { champion: Mordekaiser, team: enemy, x: 58, y: 42, last_seen: 10 }
+    - { champion: Sejuani, team: enemy, x: 56, y: 38, last_seen: 10 }
+    - { champion: Galio, team: enemy, x: 60, y: 44, last_seen: 10 }
+    - { champion: Jinx, team: enemy, x: 62, y: 40, last_seen: 10 }
+    - { champion: Braum, team: enemy, x: 60, y: 38, last_seen: 10 }
+  wards: [ { team: ally, x: 50, y: 40 } ]
+  objectives: [ { type: baron, spawn_in: 90 } ]
+choices:
+  - id: a
+    text: "Aller prendre la vague bot, puis revenir pour le Baron"
+    grade: excellent
+    explanation: >
+      Tu as 90 s : le temps de nettoyer la vague, ce qui sauve ta tour et te donne de l'or et de l'expérience.
+      Twisted Fate rejoint ensuite le groupe très vite avec son ultime. La vague doit être prise par le joueur
+      le plus mobile, et c'est toi.
+  - id: b
+    text: "Laisser la vague et rester groupé au mid"
+    grade: correct
+    explanation: >
+      Rester groupé est sûr, mais la vague va détruire une partie de ta tour et tu perds l'or qu'elle contient.
+      Avec 90 s avant le Baron, il y a le temps de la prendre.
+  - id: c
+    text: "Envoyer l'ADC prendre la vague"
+    grade: erreur
+    explanation: >
+      Ton ADC est lent à revenir, et c'est ta principale source de dégâts au Baron. S'il est attrapé ou en retard,
+      ton équipe se bat sans lui.
+lesson: "Une vague sur le côté doit être prise par le joueur le plus mobile, tant que l'objectif n'est pas imminent."

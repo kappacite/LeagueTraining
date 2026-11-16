@@ -1,0 +1,38 @@
+id: adc-support-roamed
+type: decision
+role: adc
+difficulty: facile
+patch: "16.22.1"
+title: "Seul contre deux"
+context: >
+  6:30. Ton support est parti aider le mid. Tu es seul en bot face à l'ADC et au support adverses,
+  tous les deux en pleine santé. La vague adverse arrive vers ta tour.
+me: { champion: Caitlyn, hp: 80, mana: 60, gold: 500, summoners: [SummonerFlash, SummonerHeal], items: [1055, 1036] }
+time_limit: 15
+scene:
+  champions:
+    - { champion: Caitlyn, team: ally, x: 68, y: 92, me: true }
+    - { champion: Draven, team: enemy, x: 78, y: 92 }
+    - { champion: Leona, team: enemy, x: 76, y: 90 }
+    - { champion: Lulu, team: ally, x: 48, y: 58 }
+  wards: [ { team: ally, x: 70, y: 76 } ]
+  objectives: []
+choices:
+  - id: a
+    text: "Avancer pour farmer la vague au milieu de la lane"
+    grade: erreur
+    explanation: >
+      Seule face à Draven et Leona, un seul engagement de Leona et tu meurs. Le farm ne vaut pas la mort.
+  - id: b
+    text: "Farmer prudemment sous ta tour"
+    grade: excellent
+    explanation: >
+      Ta tour fait le travail : elle t'aide à tuer les sbires et dissuade Leona d'engager. Tu perds peut-être
+      quelques sbires, mais tu restes en vie jusqu'au retour de ton support.
+  - id: c
+    text: "Partir rejoindre ton support au mid"
+    grade: correct
+    explanation: >
+      Tu évites le 1 contre 2, mais tu abandonnes toute la vague et ta tour reçoit des dégâts. Rester sous la
+      tour garde ton farm.
+lesson: "Seul contre deux, ta tour est ton meilleur allié : farme dessous et attends ton support."

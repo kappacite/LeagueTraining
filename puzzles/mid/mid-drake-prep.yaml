@@ -1,0 +1,40 @@
+id: mid-drake-prep
+type: decision
+role: mid
+difficulty: moyen
+patch: "16.22.1"
+title: "Drake dans 50 secondes"
+context: >
+  13:10. Le drake apparaît dans 50 s. Ton bot vient de back, il revient dans 20 s.
+  Le jungler adverse a été vu top il y a 10 s. Ta vague mid arrive au milieu de la lane.
+me: { champion: Ahri, hp: 75, mana: 60, gold: 850, summoners: [SummonerFlash, SummonerDot], items: [1056, 3802] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Ahri, team: ally, x: 50, y: 50, me: true }
+    - { champion: Syndra, team: enemy, x: 56, y: 44 }
+    - { champion: LeeSin, team: enemy, x: 20, y: 16, last_seen: 10 }
+    - { champion: Viego, team: ally, x: 40, y: 72 }
+  wards: [ { team: ally, x: 62, y: 60 } ]
+  objectives: [ { type: dragon, spawn_in: 50 } ]
+choices:
+  - id: a
+    text: "Aller prendre les plates de la tour mid"
+    grade: erreur
+    explanation: >
+      Tu passeras les 50 prochaines secondes sous la tour adverse au lieu de préparer le drake. Syndra
+      pourra pousser et arriver au drake avant toi : ton équipe sera en infériorité.
+  - id: b
+    text: "Pousser la vague mid, puis aller dans la rivière bot avec une balise"
+    grade: excellent
+    explanation: >
+      Une vague poussée oblige Syndra à rester pour la farmer, pendant que tu rejoins le drake en premier.
+      Ta balise dans la rivière vous donne la vision avant l'apparition. C'est ce qu'on appelle préparer
+      un objectif : la priorité sur la lane et la vision, 30 à 60 s avant.
+  - id: c
+    text: "Back maintenant"
+    grade: correct
+    explanation: >
+      Tu reviendras avec un objet, mais en laissant ta vague arriver à ta tour. Syndra aura la priorité et
+      arrivera au drake avant toi. Le back aurait dû se faire avant.
+lesson: "Prépare un objectif 30 à 60 s avant : vague poussée, puis vision dans la rivière."

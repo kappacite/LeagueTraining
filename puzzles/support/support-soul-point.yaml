@@ -1,0 +1,45 @@
+id: support-soul-point
+type: decision
+role: support
+difficulty: difficile
+patch: "16.22.1"
+title: "Point d'âme pour l'ennemi"
+context: >
+  29:00. L'équipe adverse a 3 drakes : le prochain lui donne l'âme du dragon. Il apparaît dans 40 s.
+  Ton équipe a le Baron (encore 90 s de bonus). L'ADC adverse vient de mourir, il réapparaît dans 35 s.
+  Tu es au mid avec ton équipe.
+me: { champion: Leona, hp: 90, mana: 70, gold: 400, summoners: [SummonerFlash, SummonerDot], items: [3877, 3047, 3190, 3109] }
+time_limit: 25
+scene:
+  champions:
+    - { champion: Leona, team: ally, x: 52, y: 52, me: true }
+    - { champion: Gnar, team: ally, x: 50, y: 56 }
+    - { champion: Vi, team: ally, x: 48, y: 50 }
+    - { champion: Orianna, team: ally, x: 52, y: 58 }
+    - { champion: Caitlyn, team: ally, x: 48, y: 58 }
+    - { champion: Sion, team: enemy, x: 62, y: 38 }
+    - { champion: Graves, team: enemy, x: 66, y: 44 }
+    - { champion: Azir, team: enemy, x: 66, y: 40 }
+    - { champion: Rell, team: enemy, x: 64, y: 42 }
+  wards: [ { team: ally, x: 62, y: 58 } ]
+  objectives: [ { type: dragon, spawn_in: 40 }, { type: baron, spawn_in: 300 } ]
+choices:
+  - id: a
+    text: "Utiliser le Baron pour pousser une tour au mid"
+    grade: correct
+    explanation: >
+      Le bonus du Baron sert à pousser, mais si vous ne bloquez pas le drake, l'ennemi prend l'âme et devient
+      très difficile à battre. Pousser maintenant sans préparer le drake est risqué.
+  - id: b
+    text: "Aller tenir le drake avec toute l'équipe et préparer la vision"
+    grade: excellent
+    explanation: >
+      L'âme du dragon peut faire basculer la partie. Avec leur ADC mort et le Baron sur vous, vous avez
+      l'avantage pour combattre au drake : placez-vous en premier et forcez-les à venir à 4 dans votre zone.
+  - id: c
+    text: "Faire back pour acheter avant le drake"
+    grade: erreur
+    explanation: >
+      Le drake apparaît dans 40 s : un back maintenant vous fait arriver après eux, et vous perdez l'avantage
+      du Baron et du kill.
+lesson: "Quand l'ennemi est à un drake de l'âme, ce drake devient la priorité de toute l'équipe."
