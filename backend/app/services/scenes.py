@@ -21,6 +21,19 @@ def _node(p: ScenePuzzle, node_id: str, started_at: str) -> dict:
     return {**node, "started_at": started_at}
 
 
+def _window(p: ScenePuzzle, attempt_id: int, conn: sqlite3.Connection, node_id: str) -> float:
+    """Seconds allowed on a node, counted from when the server revealed it: the client first plays the
+    previous choice's consequence and this node's intro, then shows the choices for time_limit seconds."""
+    node = p.nodes[node_id]
+    before = scene_steps.path(conn, attempt_id)
+    played = 0.0
+    if before:
+        prev = p.nodes.get(before[-1]["node_id"])
+        choice = prev.choice(before[-1]["choice_id"]) if prev else None
+        played += choice.consequence[-1].t if choice else 0
+    return played + node.intro[-1].t + node.time_limit
+
+
 def _abandon(conn: sqlite3.Connection, row, now: datetime, tz: ZoneInfo) -> None:
     attempts.close(conn, row["id"], None, "erreur", 0, False, now, now.astimezone(tz).date().isoformat())
 
@@ -62,7 +75,7 @@ def answer(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: 
         raise UnknownChoice(choice_id)
 
     elapsed = (now - datetime.fromisoformat(step["started_at"])).total_seconds()
-    timed_out = row["mode"] == "chrono" and elapsed > node.time_limit + grace_s
+    timed_out = row["mode"] == "chrono" and elapsed > _window(p, row["id"], conn, step["node_id"]) + grace_s
     grade = "erreur" if timed_out else choice.grade
     scored = bool(row["scored"])
     points = POINTS[grade] * MULTIPLIER[p.difficulty] if scored else 0

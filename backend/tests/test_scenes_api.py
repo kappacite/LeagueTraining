@@ -109,10 +109,27 @@ def test_unknown_choice_422(client, conn):
     assert answer(client, "b").status_code == 200
 
 
+def test_chrono_counts_from_end_of_intro(client, conn, clock):
+    # n1 intro lasts 4 s: the 15 s answer window (+2 s grace) starts once the choices are shown.
+    login(client, conn)
+    start(client, "chrono")
+    clock.advance(seconds=20.5)
+    assert answer(client, "b").json()["timed_out"] is False
+
+
+def test_next_node_window_includes_previous_consequence(client, conn, clock):
+    # n1.b consequence lasts 3 s and n2 intro 0 s: n2 allows 3 + 15 + 2 = 20 s after n1 was answered.
+    login(client, conn)
+    start(client, "chrono")
+    answer(client, "b")
+    clock.advance(seconds=20.5)
+    assert answer(client, "b").json()["timed_out"] is True
+
+
 def test_timeout_still_follows_choice(client, conn, clock):
     login(client, conn)
     start(client, "chrono")
-    clock.advance(seconds=17.5)  # n1 time_limit 15 + 2 s grace
+    clock.advance(seconds=21.5)  # n1: intro 4 + time_limit 15 + 2 s grace
     r = answer(client, "c").json()
     assert (r["grade"], r["timed_out"], r["points"]) == ("erreur", True, 0)
     assert r["next"]["id"] == "n2"
