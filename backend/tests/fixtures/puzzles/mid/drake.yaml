@@ -1,0 +1,20 @@
+id: mid-drake-01
+type: decision
+role: mid
+difficulty: moyen
+patch: "15.23.1"
+title: "Drake dans 45 secondes"
+context: "14:20. Ton bot lane vient de back. Le jungler adverse a été vu top il y a 10 s."
+me: { champion: Ahri, hp: 70, mana: 55, gold: 850, summoners: [SummonerFlash, SummonerDot], items: [1056] }
+time_limit: 20
+scene:
+  champions:
+    - { champion: Ahri, team: ally, x: 50, y: 50, me: true }
+    - { champion: LeeSin, team: enemy, x: 20, y: 18, last_seen: 10 }
+  wards: [ { team: ally, x: 62, y: 60 } ]
+  objectives: [ { type: dragon, spawn_in: 45 } ]
+choices:
+  - { id: a, text: "Prendre les plates mid", grade: erreur, explanation: "Tu arrives en retard au drake." }
+  - { id: b, text: "Push et warder la rivière bot", grade: excellent, explanation: "Prio + vision avant l'objectif." }
+  - { id: c, text: "Back", grade: correct, explanation: "Sûr mais passif." }
+lesson: "Prépare l'objectif 30 à 60 s avant."

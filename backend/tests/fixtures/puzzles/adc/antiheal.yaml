@@ -1,0 +1,16 @@
+id: adc-antiheal-01
+type: itemization
+role: adc
+difficulty: facile
+patch: "15.23.1"
+title: "Soraka en face"
+context: "Tu reviens en base avec 1300 golds."
+me: { champion: Jinx, level: 9, gold: 1300, items: [1056] }
+allies: [Malphite]
+enemies:
+  - { champion: Soraka }
+  - { champion: Zed, items: [3123] }
+choices:
+  - { id: a, text: "Anti-heal", items: [3033], grade: excellent, explanation: "Soraka soigne énormément." }
+  - { id: b, text: "Rien", grade: erreur, explanation: "Gaspillage de golds." }
+lesson: "L'anti-heal tôt contre les soigneurs."
