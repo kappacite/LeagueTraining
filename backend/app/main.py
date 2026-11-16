@@ -44,6 +44,8 @@ def create_app(settings: Settings | None = None, dd: DDragon | None = None,
         if response.status_code == 200:
             if request.url.path.startswith("/assets/"):  # Vite output, content-hashed names
                 response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+            elif request.url.path == "/" or request.url.path.endswith(".html"):
+                response.headers["Cache-Control"] = "no-cache"  # always revalidate the app shell
             elif request.url.path.startswith("/dd/"):
                 response.headers["Cache-Control"] = "public, max-age=86400"
         return response

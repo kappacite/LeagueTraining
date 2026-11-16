@@ -55,6 +55,7 @@ def test_static_index_served(settings, dd):
     with TestClient(main.create_app(settings, dd=dd), base_url=ORIGIN) as c:
         r = c.get("/")
         assert "LeagueTraining" in r.text and "content-security-policy" in r.headers
+        assert r.headers["cache-control"] == "no-cache"  # new deploys must reach browsers
         assert c.get("/assets/app-abc123.js").headers["cache-control"] == "public, max-age=31536000, immutable"
         assert c.get("/api/me").status_code == 401  # API not shadowed by the static mount
 

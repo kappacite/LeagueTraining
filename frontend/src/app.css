@@ -1,58 +1,218 @@
+/* Hextech design system. Fonts are free stand-ins: swap the two --font-* values for Beaufort / Spiegel if licensed. */
 :root {
-  --river: #14242c;      /* page */
-  --bank: #1c333c;       /* raised surfaces */
-  --reed: #2b4752;       /* borders, inactive */
-  --mist: #93a9b1;       /* secondary text */
-  --foam: #e6edef;       /* text */
-  --ally: #4fa3e0;
-  --enemy: #e5534b;
-  --excellent: #e8b84a;
-  --correct: #7fb77e;
-  --erreur: #e5534b;
+  --lol-black: #010A13;
+  --lol-dark: #0A1428;
+  --lol-panel: #1E2328;
+  --lol-surface: #161F32;
 
-  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --body: "Barlow", system-ui, sans-serif;
+  --lol-gold: #C8AA6E;
+  --lol-gold-bright: #F0E6D2;
+  --lol-gold-dark: #785A28;
+  --lol-gold-deep: #463714;
+  --lol-gold-hover: #D3BB8B;
+
+  --lol-blue: #0AC8B9;
+  --lol-blue-light: #59C1DE;
+  --lol-blue-dark: #005A82;
+  --lol-hextech: #0BC4E2;
+
+  --lol-text: #F0E6D2;
+  --lol-text-secondary: #A09B8C;
+  --lol-muted: #5B5A56;
+
+  --lol-success: #0AC8B9;
+  --lol-danger: #C43F3F;
+
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+
+  /* Brushed-gold border: light from the top. */
+  --metal: linear-gradient(180deg, var(--lol-gold-hover) 0%, var(--lol-gold) 30%, var(--lol-gold-dark) 75%, var(--lol-gold-deep) 100%);
+  --metal-soft: linear-gradient(180deg, var(--lol-gold-dark) 0%, var(--lol-gold-deep) 100%);
+  --panel-bg: linear-gradient(180deg, #13203a 0%, var(--lol-dark) 40%, #060f1d 100%);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Grades */
+  --excellent: var(--lol-gold);
+  --correct: var(--lol-blue);
+  --erreur: var(--lol-danger);
 
   color-scheme: dark;
-  font: 400 1rem/1.5 var(--body);
-  color: var(--foam);
-  background: var(--river);
+  font: 400 1rem/1.55 var(--font-body);
+  color: var(--lol-text);
+  background: var(--lol-black);
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; }
-h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0 0 0.5em; }
-h1 { font-size: 2.5rem; }
-h2 { font-size: 1.6rem; }
-h3 { font-size: 1.2rem; }
-p { margin: 0 0 1em; max-width: 68ch; }
-a { color: var(--ally); }
+body { margin: 0; min-height: 100vh; overflow-x: hidden; }
 img { display: block; }
+p { margin: 0 0 1em; max-width: 68ch; }
+a { color: var(--lol-blue-light); }
 
-button, .button {
-  font: 600 1rem var(--body);
-  color: var(--river);
-  background: var(--foam);
-  border: 0;
-  border-radius: 4px;
-  padding: 0.6em 1.1em;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lol-gold-bright);
+  margin: 0 0 0.5em;
 }
-button.quiet, .button.quiet { background: transparent; color: var(--foam); box-shadow: inset 0 0 0 1px var(--reed); }
-button:disabled { opacity: 0.5; cursor: default; }
-:focus-visible { outline: 2px solid var(--excellent); outline-offset: 2px; }
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  background: linear-gradient(180deg, var(--lol-gold-bright) 35%, var(--lol-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+h2 { font-size: 1.35rem; color: var(--lol-gold); }
+h3 { font-size: 1rem; color: var(--lol-gold); }
 
-.num { font-family: var(--display); font-weight: 600; font-variant-numeric: tabular-nums; }
-.muted { color: var(--mist); }
+.num { font-family: var(--font-display); font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.muted { color: var(--lol-text-secondary); }
 .grade-excellent { color: var(--excellent); }
 .grade-correct { color: var(--correct); }
 .grade-erreur { color: var(--erreur); }
 
-.avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--reed); object-fit: cover; flex: none; }
-.avatar.initial { display: grid; place-items: center; font: 600 0.8rem var(--display); }
+/* ---- Panels: gold-rimmed night-blue plates with corner brackets ---- */
+.panel {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  background: var(--panel-bg);
+  border: 1px solid transparent;
+  border-image: var(--metal-soft) 1;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(240, 230, 210, 0.06), inset 0 30px 40px -30px rgba(89, 193, 222, 0.08);
+  transition: transform 250ms var(--ease), box-shadow 250ms var(--ease), border-image 250ms;
+}
+.panel::before, .panel::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border-color: var(--lol-gold);
+  border-style: solid;
+}
+.panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.panel::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.panel.interactive:hover, .panel.interactive:focus-within {
+  border-image: var(--metal) 1;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 18px rgba(11, 196, 226, 0.12), inset 0 1px 0 rgba(240, 230, 210, 0.1);
+}
+.panel.major { border-image: var(--metal) 1; padding: 2rem 2.25rem; }
+
+/* ---- Ornamental divider: gold rule with a central diamond ---- */
+.ornament {
+  display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0;
+  color: var(--lol-gold-dark);
+}
+.ornament::before, .ornament::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lol-gold-dark) 30%, var(--lol-gold) 50%, var(--lol-gold-dark) 70%, transparent);
+}
+.ornament > span, .diamond {
+  width: 8px; height: 8px; transform: rotate(45deg); flex: none;
+  border: 1px solid var(--lol-gold); background: var(--lol-dark);
+  box-shadow: 0 0 6px rgba(200, 170, 110, 0.4);
+  display: inline-block;
+}
+
+/* ---- Buttons ---- */
+button, .button {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  font: 700 0.85rem/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--lol-gold-bright);
+  padding: 0.95em 1.7em;
+  border: 2px solid transparent;
+  border-image: var(--metal) 1;
+  background: linear-gradient(180deg, #1c2a3e 0%, #0d1828 60%, var(--lol-dark) 100%);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: background 200ms, box-shadow 200ms, color 200ms, transform 120ms;
+}
+button:hover:not(:disabled), .button:hover {
+  color: #fff;
+  background: linear-gradient(180deg, #2a3d56 0%, #14243a 60%, #0c1a2e 100%);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5), 0 0 16px rgba(200, 170, 110, 0.28);
+}
+button:active:not(:disabled), .button:active { transform: translateY(1px); filter: brightness(0.9); }
+button:disabled { opacity: 0.45; cursor: default; }
+
+/* Secondary: bronze rim, muted gold text. */
+button.quiet, .button.quiet {
+  color: var(--lol-gold);
+  border-image: var(--metal-soft) 1;
+  background: rgba(1, 10, 19, 0.75);
+  box-shadow: none;
+}
+button.quiet:hover:not(:disabled), .button.quiet:hover {
+  color: var(--lol-gold-bright);
+  border-image: var(--metal) 1;
+  background: rgba(10, 20, 40, 0.9);
+}
+
+/* Special action: Hextech cyan with a slow light sweep. */
+button.hextech, .button.hextech {
+  overflow: hidden;
+  color: var(--lol-gold-bright);
+  border-image: linear-gradient(180deg, var(--lol-blue-light), var(--lol-hextech) 40%, var(--lol-blue-dark)) 1;
+  background: linear-gradient(180deg, #08384a 0%, #04222f 60%, #021520 100%);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5), 0 0 14px rgba(11, 196, 226, 0.25);
+}
+button.hextech::after, .button.hextech::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(89, 193, 222, 0.35) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: sweep 3.6s var(--ease) infinite;
+}
+button.hextech:hover:not(:disabled), .button.hextech:hover {
+  background: linear-gradient(180deg, #0b4a60 0%, #063041 60%, #031c29 100%);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4), 0 0 22px rgba(11, 196, 226, 0.4);
+}
+@keyframes sweep { 0%, 55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* ---- Form controls ---- */
+select, input {
+  font: 600 0.95rem var(--font-body);
+  color: var(--lol-gold-bright);
+  background: linear-gradient(180deg, #0b1424, var(--lol-black));
+  border: 1px solid var(--lol-gold-dark);
+  border-radius: 0;
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--lol-gold) 50%), linear-gradient(135deg, var(--lol-gold) 50%, transparent 50%), linear-gradient(180deg, #0b1424, var(--lol-black));
+  background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%, 0 0;
+  background-size: 5px 5px, 5px 5px, 100% 100%;
+  background-repeat: no-repeat;
+}
+select:hover { border-color: var(--lol-gold); }
+select:focus, input:focus { outline: none; border-color: var(--lol-hextech); box-shadow: 0 0 0 1px var(--lol-hextech), 0 0 12px rgba(11, 196, 226, 0.3); }
+option { background: var(--lol-dark); color: var(--lol-text); }
+
+:focus-visible { outline: 2px solid var(--lol-hextech); outline-offset: 3px; }
+
+/* ---- Avatars: gold-ringed medallions ---- */
+.avatar {
+  width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none;
+  background: var(--lol-dark);
+  box-shadow: 0 0 0 1px var(--lol-gold-dark), 0 0 0 2px var(--lol-black);
+}
+.avatar.initial { display: grid; place-items: center; font: 700 0.75rem var(--font-display); color: var(--lol-gold); }
+
+/* One orchestrated entrance per page. */
+.rise { animation: rise 400ms var(--ease) both; }
+.rise-2 { animation: rise 400ms 90ms var(--ease) both; }
+.rise-3 { animation: rise 400ms 180ms var(--ease) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
