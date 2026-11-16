@@ -95,7 +95,7 @@
   .tile:hover { color: var(--lol-gold-bright); }
   .tile-name { font: 0.95rem var(--font-display); color: var(--lol-gold-bright); }
   .bar { width: 100%; height: 4px; background: var(--lol-black); border: 1px solid var(--lol-gold-deep); }
-  .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--lol-blue-dark), var(--lol-hextech)); box-shadow: 0 0 8px var(--lol-hextech); }
+  .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--lol-blue-dark), var(--lol-hextech)); }
   .count { font-size: 0.8rem; }
 
   @media (max-width: 52rem) {

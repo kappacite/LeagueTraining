@@ -76,7 +76,7 @@
   .medal svg { width: 110px; height: 110px; }
   .frame { fill: var(--lol-black); stroke: var(--lol-gold-dark); stroke-width: 1.5; }
   .track { fill: none; stroke: var(--lol-gold-deep); stroke-width: 4; }
-  .ring { fill: none; stroke: var(--lol-hextech); stroke-width: 4; stroke-linecap: butt; filter: drop-shadow(0 0 4px rgba(11, 196, 226, 0.8)); transition: stroke-dasharray 800ms var(--ease); }
+  .ring { fill: none; stroke: var(--lol-hextech); stroke-width: 4; stroke-linecap: butt; transition: stroke-dasharray 800ms var(--ease); }
   .icon { position: absolute; top: 42px; color: var(--lol-gold); }
   .empty .icon { color: var(--lol-muted); }
   .name { font: 0.95rem var(--font-display); color: var(--lol-gold-bright); }
@@ -85,7 +85,7 @@
   .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .level { display: grid; gap: 0.75rem; }
   .hexbar { height: 8px; background: var(--lol-black); border: 1px solid var(--lol-gold-dark); }
-  .hexbar span { display: block; height: 100%; background: linear-gradient(90deg, var(--lol-blue-dark), var(--lol-hextech)); box-shadow: 0 0 10px var(--lol-hextech); transition: width 800ms var(--ease); }
+  .hexbar span { display: block; height: 100%; background: linear-gradient(90deg, var(--lol-blue-dark), var(--lol-hextech)); transition: width 800ms var(--ease); }
   .level b { color: var(--lol-gold-bright); }
 
   @media (max-width: 52rem) {
