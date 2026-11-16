@@ -1,0 +1,178 @@
+id: scene-baron-call
+type: scene
+role: jungle
+difficulty: difficile
+patch: "16.22.1"
+title: "L'appel Baron"
+context: "28 minutes, partie serrée. Ton équipe vient de tuer leur ADC au mid."
+me: { champion: Nocturne, hp: 75, mana: 60, gold: 300, summoners: [SummonerFlash, SummonerSmite], items: [6610, 3071, 3047] }
+start: n1
+lesson: "Un kill ouvre une fenêtre : contrôle la zone, sécurise l'objectif, puis convertis le bonus en tours."
+
+nodes:
+  n1:
+    intro:
+      - t: 0
+        clock: "28:10"
+        champions:
+          - { champion: Nocturne, team: ally, x: 46, y: 48, me: true }
+          - { champion: Gnar, team: ally, x: 42, y: 52 }
+          - { champion: Orianna, team: ally, x: 47, y: 53 }
+          - { champion: Caitlyn, team: ally, x: 43, y: 57 }
+          - { champion: Lulu, team: ally, x: 45, y: 55 }
+          - { champion: Graves, team: enemy, x: 40, y: 26 }
+          - { champion: Sion, team: enemy, x: 60, y: 36 }
+          - { champion: Azir, team: enemy, x: 64, y: 38 }
+          - { champion: Rell, team: enemy, x: 62, y: 35 }
+          - { champion: Jinx, team: enemy, x: 52, y: 46, dead: true }
+        wards: [ { id: w1, team: ally, x: 40, y: 34 } ]
+        objectives: [ { type: baron } ]
+        events: [ { type: kill, x: 52, y: 46 } ]
+        caption: "Jinx tombe. Elle réapparaît dans 45 secondes."
+      - t: 3
+        clock: "28:13"
+        champions: [ { champion: Graves, x: 34, y: 28, hidden: true } ]
+        caption: "Graves disparaît près du Baron. Il a son Châtiment."
+    question: "Comment exploites-tu ce kill ?"
+    time_limit: 15
+    choices:
+      - id: a
+        text: "Lancer le Baron tout de suite"
+        grade: correct
+        explanation: >
+          Le 5 contre 4 est là, mais Graves est collé au Baron, invisible, avec son Châtiment. Ça peut marcher,
+          mais vous le faites sans contrôler la zone.
+        consequence:
+          - { t: 0, clock: "28:20", champions: [ { champion: Nocturne, x: 34, y: 30 }, { champion: Gnar, x: 36, y: 32 }, { champion: Orianna, x: 38, y: 33 }, { champion: Caitlyn, x: 39, y: 36 }, { champion: Lulu, x: 37, y: 35 } ], caption: "Vous lancez le Baron." }
+        next: n2
+      - id: b
+        text: "Chasser Graves et nettoyer la vision autour du Baron, puis le lancer"
+        grade: excellent
+        explanation: >
+          Tu as 45 s. En prenant d'abord la rivière, tu forces Graves à partir ou à se battre seul,
+          et les ennemis devront venir dans ton noir pour contester.
+        consequence:
+          - { t: 0, clock: "28:20", champions: [ { champion: Nocturne, x: 36, y: 26 }, { champion: Gnar, x: 40, y: 30 } ], wards: [ { id: w2, team: ally, x: 36, y: 22 } ], caption: "Tu entres dans la zone du Baron avec Gnar." }
+          - { t: 3, clock: "28:30", champions: [ { champion: Graves, x: 44, y: 18, hidden: false } ], events: [ { type: ping, x: 44, y: 18, label: "Graves recule" } ], caption: "Graves recule. La zone est à vous." }
+          - { t: 5, clock: "28:35", champions: [ { champion: Orianna, x: 38, y: 33 }, { champion: Caitlyn, x: 39, y: 36 }, { champion: Lulu, x: 37, y: 35 } ], caption: "Vous lancez le Baron, avec la vision." }
+        next: n2
+      - id: c
+        text: "Pousser la tour mid"
+        grade: erreur
+        explanation: >
+          Une tour contre un Baron à 5 contre 4 : l'échange est mauvais. Pendant que vous tapez la tour,
+          Jinx réapparaît et l'occasion disparaît.
+        consequence:
+          - { t: 0, clock: "28:20", champions: [ { champion: Nocturne, x: 58, y: 42 }, { champion: Orianna, x: 56, y: 44 }, { champion: Caitlyn, x: 54, y: 46 } ], caption: "Vous tapez la tour mid." }
+          - { t: 3, clock: "28:55", champions: [ { champion: Jinx, x: 70, y: 32, dead: false } ], caption: "La tour tombe, mais Jinx est de retour. Ils reprennent le Baron en main." }
+        ending: tower_only
+
+  n2:
+    intro:
+      - t: 0
+        clock: "28:50"
+        objectives: [ { type: baron } ]
+        champions: [ { champion: Graves, x: 26, y: 22, hidden: true } ]
+        caption: "Le Baron est à moitié. Un bruit dans le buisson derrière le mur…"
+      - t: 3
+        clock: "28:53"
+        events: [ { type: ping, x: 26, y: 22, label: "Graves ?" } ]
+        caption: "Graves rôde, prêt à voler avec Châtiment."
+    question: "Le Baron descend. Quand utilises-tu Châtiment ?"
+    time_limit: 10
+    choices:
+      - id: a
+        text: "Tout de suite, pour accélérer"
+        grade: erreur
+        explanation: >
+          Châtiment utilisé trop tôt, c'est un vol garanti : Graves attend que le Baron soit bas et ton Châtiment
+          n'est plus disponible pour le contrer.
+        consequence:
+          - { t: 0, caption: "Tu utilises Châtiment…" }
+          - { t: 3, clock: "29:05", champions: [ { champion: Graves, x: 32, y: 28, hidden: false } ], events: [ { type: objective, x: 33, y: 30, label: "Volé !" } ], caption: "Graves vole le Baron." }
+        ending: stolen
+      - id: b
+        text: "Le garder pour la fin, sous le seuil de Châtiment"
+        grade: excellent
+        explanation: >
+          Tu gardes le contrôle : Graves ne peut voler que si tu rates ton timing. Le Baron tombe chez vous.
+        consequence:
+          - { t: 0, caption: "Tu attends le bon moment…" }
+          - { t: 3, clock: "29:10", events: [ { type: objective, x: 33, y: 30, label: "Baron !" } ], caption: "Châtiment au bon moment. Baron pour vous." }
+        next: n3
+      - id: c
+        text: "Arrêter le Baron et aller chercher Graves"
+        grade: correct
+        explanation: >
+          Tu enlèves le risque de vol, mais tu perds du temps et Jinx se rapproche de son retour. Le Baron tombe
+          quand même, plus tard.
+        consequence:
+          - { t: 0, champions: [ { champion: Nocturne, x: 28, y: 24 } ], caption: "Tu chasses Graves, qui fuit." }
+          - { t: 3, clock: "29:25", events: [ { type: objective, x: 33, y: 30, label: "Baron" } ], caption: "Vous finissez le Baron, de justesse." }
+        next: n3
+
+  n3:
+    intro:
+      - t: 0
+        clock: "29:30"
+        objectives: []
+        champions:
+          - { champion: Jinx, x: 82, y: 18, dead: false }
+          - { champion: Sion, x: 58, y: 40 }
+          - { champion: Azir, x: 60, y: 42 }
+        caption: "Vous avez le Baron. Jinx vient de réapparaître."
+      - t: 3
+        clock: "29:33"
+        caption: "Les vagues bot et top arrivent vers leurs tours."
+    question: "Comment utilises-tu le bonus du Baron ?"
+    time_limit: 12
+    choices:
+      - id: a
+        text: "Pousser mid à cinq avec les sbires renforcés"
+        grade: excellent
+        explanation: >
+          Le Baron rend vos sbires très forts : à cinq sur une seule lane, les ennemis ne peuvent pas défendre
+          sans se battre en infériorité. Vous prenez les tours et un inhibiteur.
+        consequence:
+          - { t: 0, champions: [ { champion: Nocturne, x: 58, y: 42 }, { champion: Gnar, x: 56, y: 44 }, { champion: Orianna, x: 57, y: 45 }, { champion: Caitlyn, x: 54, y: 46 }, { champion: Lulu, x: 55, y: 47 } ], caption: "Vous poussez mid à cinq." }
+          - { t: 4, clock: "30:30", champions: [ { champion: Nocturne, x: 74, y: 26 }, { champion: Caitlyn, x: 70, y: 30 } ], events: [ { type: objective, x: 76, y: 24, label: "Inhibiteur" } ], caption: "Deux tours et l'inhibiteur mid tombent." }
+        ending: best
+      - id: b
+        text: "Se séparer pour farmer chacun de son côté"
+        grade: erreur
+        explanation: >
+          Le Baron ne sert à rien si personne ne pousse ensemble. Séparés, vous offrez des cibles isolées
+          et le bonus expire sans tour.
+        consequence:
+          - { t: 0, champions: [ { champion: Nocturne, x: 70, y: 52 }, { champion: Caitlyn, x: 86, y: 70 }, { champion: Gnar, x: 10, y: 20 } ], caption: "Chacun part de son côté." }
+          - { t: 3, champions: [ { champion: Caitlyn, dead: true } ], events: [ { type: kill, x: 86, y: 70 } ], caption: "Caitlyn se fait attraper bot." }
+        ending: wasted
+      - id: c
+        text: "Back pour acheter, puis grouper mid"
+        grade: correct
+        explanation: >
+          Acheter est utile, mais le bonus du Baron ne dure pas : vous perdez la moitié de sa durée en allers-retours.
+        consequence:
+          - { t: 0, champions: [ { champion: Nocturne, x: 8, y: 92 }, { champion: Caitlyn, x: 9, y: 91 } ], caption: "Vous backs." }
+          - { t: 3, clock: "31:10", events: [ { type: objective, x: 58, y: 42, label: "Tour" } ], caption: "Vous prenez une tour avant la fin du bonus." }
+        ending: ok
+
+endings:
+  tower_only:
+    title: "Une tour, pas de Baron"
+    outcome: { towers: 1, barons: 0 }
+    note: "Jinx revient, ils reprennent le contrôle de la rivière."
+  stolen:
+    title: "Baron volé"
+    outcome: { barons: -1, kills: -2, gold: -1500 }
+    note: "Le Baron passe chez eux, et ils engagent sur une équipe sans Châtiment."
+  wasted:
+    title: "Baron gaspillé"
+    outcome: { barons: 1, towers: 0, kills: -1 }
+  ok:
+    title: "Baron et une tour"
+    outcome: { barons: 1, towers: 1, gold: 1800 }
+  best:
+    title: "Baron, deux tours et un inhibiteur"
+    outcome: { barons: 1, towers: 2, kills: 1, gold: 3500 }
+    note: "La partie bascule de votre côté."

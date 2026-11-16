@@ -1,0 +1,191 @@
+id: scene-drake-1400
+type: scene
+role: mid
+difficulty: moyen
+patch: "16.22.1"
+title: "Le drake de 14 minutes"
+context: "Ton bot vient de back. Le drake apparaît à 14:00 et ton équipe en a besoin."
+me: { champion: Ahri, hp: 75, mana: 60, gold: 850, summoners: [SummonerFlash, SummonerDot], items: [1056, 3802] }
+start: n1
+lesson: "Un objectif se prépare : la priorité sur la vague, la vision, puis le nombre au bon endroit."
+
+nodes:
+  n1:
+    intro:
+      - t: 0
+        clock: "13:10"
+        champions:
+          - { champion: Ahri, team: ally, x: 50, y: 52, me: true }
+          - { champion: Viego, team: ally, x: 30, y: 62 }
+          - { champion: Jinx, team: ally, x: 14, y: 88 }
+          - { champion: Thresh, team: ally, x: 12, y: 86 }
+          - { champion: Syndra, team: enemy, x: 57, y: 44 }
+          - { champion: LeeSin, team: enemy, x: 40, y: 24 }
+          - { champion: Kaisa, team: enemy, x: 88, y: 82 }
+          - { champion: Nautilus, team: enemy, x: 86, y: 80 }
+        wards: [ { id: w1, team: ally, x: 62, y: 60 } ]
+        objectives: [ { type: dragon, spawn_in: 50 } ]
+        caption: "Ton bot revient de la base. Lee Sin farm son camp du haut."
+      - t: 3
+        clock: "13:13"
+        champions:
+          - { champion: LeeSin, x: 30, y: 16, hidden: true }
+          - { champion: Jinx, x: 30, y: 90 }
+          - { champion: Thresh, x: 28, y: 88 }
+        caption: "Lee Sin entre dans le brouillard vers le top. Ta vague mid arrive."
+      - t: 6
+        clock: "13:16"
+        champions: [ { champion: Jinx, x: 44, y: 91 }, { champion: Thresh, x: 42, y: 89 } ]
+        caption: "Le drake apparaît dans 44 secondes."
+    question: "Que fais-tu de ta vague ?"
+    time_limit: 15
+    choices:
+      - id: a
+        text: "Prendre les plates de la tour mid"
+        grade: erreur
+        explanation: >
+          Tu passes 30 s sous la tour adverse au lieu de préparer le drake. Lee Sin, invisible, revient par la rivière
+          du haut et Syndra te bloque : tu meurs, et le drake est perdu à 4 contre 3.
+        consequence:
+          - { t: 0, clock: "13:20", champions: [ { champion: Ahri, x: 58, y: 42 } ], caption: "Tu tapes la tour…" }
+          - { t: 3, clock: "13:35", champions: [ { champion: LeeSin, x: 52, y: 36, hidden: false } ], events: [ { type: ping, x: 52, y: 36, label: "Lee Sin !" } ], caption: "Lee Sin sort du brouillard dans ton dos." }
+          - { t: 5, clock: "13:38", champions: [ { champion: Ahri, dead: true } ], events: [ { type: kill, x: 58, y: 42 } ], caption: "Tu meurs. Ils partent au drake." }
+        ending: dead_plates
+      - id: b
+        text: "Pousser la vague, puis warder la rivière bot"
+        grade: excellent
+        explanation: >
+          La vague poussée oblige Syndra à rester farmer sous sa tour, et tu arrives au drake en premier avec
+          la vision. C'est exactement la préparation d'un objectif.
+        consequence:
+          - { t: 0, clock: "13:20", champions: [ { champion: Ahri, x: 55, y: 46 } ], caption: "Ta vague s'écrase sur leur tour." }
+          - { t: 3, clock: "13:35", champions: [ { champion: Ahri, x: 62, y: 66 }, { champion: Viego, x: 54, y: 70 } ], wards: [ { id: w2, team: ally, x: 70, y: 66 } ], caption: "Tu poses une balise près du drake. Syndra farme sous sa tour." }
+        next: n2
+      - id: c
+        text: "Back tout de suite pour acheter"
+        grade: correct
+        explanation: >
+          Tu reviens plus fort, mais ta vague arrive à ta tour et Syndra aura la priorité. Tu rejoins le drake
+          plus tard, sans vision dans la rivière.
+        consequence:
+          - { t: 0, clock: "13:20", champions: [ { champion: Ahri, x: 8, y: 92 } ], caption: "Tu backs." }
+          - { t: 3, clock: "13:45", champions: [ { champion: Ahri, x: 52, y: 72 }, { champion: Viego, x: 54, y: 70 } ], caption: "Tu reviens avec ton objet, sans vision devant toi." }
+        next: n2
+
+  n2:
+    intro:
+      - t: 0
+        clock: "13:55"
+        champions:
+          - { champion: Jinx, x: 58, y: 80 }
+          - { champion: Thresh, x: 60, y: 78 }
+          - { champion: Syndra, x: 62, y: 52 }
+        objectives: [ { type: dragon, spawn_in: 5 } ]
+        caption: "Ton bot remonte vers le drake. Syndra arrive par le mid."
+      - t: 3
+        clock: "13:58"
+        champions: [ { champion: LeeSin, x: 74, y: 62, hidden: false } ]
+        events: [ { type: ping, x: 74, y: 62, label: "Lee Sin" } ]
+        caption: "Lee Sin apparaît sur ta balise, de l'autre côté du drake."
+    question: "Lee Sin s'est montré. Que fais-tu ?"
+    time_limit: 12
+    choices:
+      - id: a
+        text: "Aller vérifier le buisson du drake toute seule"
+        grade: erreur
+        explanation: >
+          Kai'Sa et Nautilus attendent dans ce buisson. Entrer seule sans vision, c'est offrir le premier kill
+          et le fight à 4 contre 5.
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 68, y: 74 } ], caption: "Tu avances dans le buisson…" }
+          - { t: 2, champions: [ { champion: Nautilus, x: 70, y: 76, hidden: false }, { champion: Kaisa, x: 72, y: 78, hidden: false }, { champion: Ahri, dead: true } ], events: [ { type: kill, x: 68, y: 74 } ], caption: "Nautilus t'attrape. Tu meurs." }
+        ending: caught
+      - id: b
+        text: "Rester groupée avec ton bot et ton jungler, devant le drake"
+        grade: excellent
+        explanation: >
+          Vous êtes quatre ensemble, avec la vision, face à des ennemis qui arrivent séparés. Laisse-les venir
+          à toi : c'est vous qui choisissez le combat.
+        consequence:
+          - { t: 0, clock: "14:00", objectives: [ { type: dragon } ], champions: [ { champion: Ahri, x: 62, y: 70 }, { champion: Viego, x: 64, y: 72 }, { champion: Jinx, x: 60, y: 76 }, { champion: Thresh, x: 63, y: 75 } ], caption: "Le drake apparaît. Vous êtes en place." }
+        next: n3
+      - id: c
+        text: "Lancer le drake tout de suite à quatre"
+        grade: correct
+        explanation: >
+          Vous avez le nombre, mais vous tournez le dos aux ennemis pendant que le drake vous tape. Ça peut passer,
+          mais attendre qu'ils s'engagent est plus sûr.
+        consequence:
+          - { t: 0, clock: "14:00", objectives: [ { type: dragon } ], champions: [ { champion: Ahri, x: 66, y: 70 }, { champion: Viego, x: 67, y: 69 }, { champion: Jinx, x: 64, y: 72 }, { champion: Thresh, x: 66, y: 72 } ], caption: "Vous commencez le drake." }
+        next: n3
+
+  n3:
+    intro:
+      - t: 0
+        clock: "14:08"
+        champions:
+          - { champion: Nautilus, x: 74, y: 70, hidden: false }
+          - { champion: LeeSin, x: 74, y: 64 }
+          - { champion: Syndra, x: 64, y: 60 }
+          - { champion: Kaisa, x: 80, y: 74, hidden: true }
+        caption: "Nautilus et Lee Sin engagent de face, Syndra par le mid."
+      - t: 3
+        clock: "14:11"
+        champions: [ { champion: Kaisa, x: 72, y: 80, hidden: false } ]
+        events: [ { type: ping, x: 72, y: 80, label: "Kai'Sa" } ]
+        caption: "Kai'Sa arrive par le côté, sur Jinx."
+    question: "Le fight commence. Où utilises-tu ton ultime ?"
+    time_limit: 10
+    choices:
+      - id: a
+        text: "Foncer sur Nautilus, le premier à portée"
+        grade: erreur
+        explanation: >
+          Nautilus est un tank : tes dégâts ne le tuent pas, et ton ultime est utilisé quand Kai'Sa arrive
+          sur Jinx. Ta carry meurt, le fight bascule.
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 72, y: 70 } ], caption: "Tu ultimes sur Nautilus…" }
+          - { t: 2, champions: [ { champion: Jinx, dead: true }, { champion: Ahri, dead: true } ], events: [ { type: kill, x: 64, y: 74 } ], caption: "Kai'Sa tue Jinx. Ils gagnent le fight et le drake." }
+        ending: lost_fight
+      - id: b
+        text: "Garder ton ultime pour Kai'Sa qui arrive sur Jinx"
+        grade: excellent
+        explanation: >
+          Ton rôle ici, c'est de protéger ta carry : Kai'Sa plonge, ton charme et tes dégâts la tuent avant
+          qu'elle touche Jinx. Jinx nettoie ensuite le fight.
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 66, y: 76 } ], caption: "Tu attends Kai'Sa…" }
+          - { t: 2, champions: [ { champion: Kaisa, dead: true } ], events: [ { type: kill, x: 70, y: 78 } ], caption: "Charme, kill sur Kai'Sa." }
+          - { t: 4, clock: "14:20", champions: [ { champion: Nautilus, dead: true }, { champion: LeeSin, dead: true } ], events: [ { type: objective, x: 67, y: 70, label: "Drake" } ], caption: "Jinx nettoie. Drake pour vous." }
+        ending: best
+      - id: c
+        text: "Taper le drake pendant que l'équipe se bat"
+        grade: correct
+        explanation: >
+          Vous sécurisez le drake, mais sans tes dégâts dans le fight vous perdez deux joueurs. Le gain est
+          réel mais coûteux.
+        consequence:
+          - { t: 0, champions: [ { champion: Ahri, x: 67, y: 70 } ], caption: "Tu tapes le drake." }
+          - { t: 3, champions: [ { champion: Jinx, dead: true }, { champion: Thresh, dead: true } ], events: [ { type: objective, x: 67, y: 70, label: "Drake" } ], caption: "Drake pris, mais Jinx et Thresh tombent." }
+        ending: drake_costly
+
+endings:
+  dead_plates:
+    title: "Morte à 13:38, drake perdu"
+    outcome: { drakes: -1, gold: -1100, kills: -1 }
+    note: "Deux plates contre un drake et un kill : l'échange est très mauvais."
+  caught:
+    title: "Attrapée avant le fight"
+    outcome: { drakes: -1, kills: -2 }
+    note: "À 4 contre 5, ton équipe recule et laisse le drake."
+  lost_fight:
+    title: "Fight perdu au drake"
+    outcome: { drakes: -1, kills: -3, gold: -1800 }
+  drake_costly:
+    title: "Drake, mais deux morts"
+    outcome: { drakes: 1, kills: -1 }
+    note: "Ils utilisent votre temps de mort pour prendre deux plates bot."
+  best:
+    title: "Fight gagné, drake et tour bot"
+    outcome: { drakes: 1, towers: 1, kills: 3, gold: 2400 }
+    note: "Vous enchaînez sur la tour bot pendant leur temps de mort."

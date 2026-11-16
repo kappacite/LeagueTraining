@@ -1,0 +1,159 @@
+id: scene-vision-baron
+type: scene
+role: support
+difficulty: moyen
+patch: "16.22.1"
+title: "La guerre de vision"
+context: "24 minutes. Le Baron apparaît à 25:00, ton équipe a la priorité sur les vagues."
+me: { champion: Nautilus, hp: 100, mana: 80, gold: 100, summoners: [SummonerFlash, SummonerDot], items: [3877, 3047, 3190, 2055] }
+start: n1
+lesson: "Avant un objectif : enlève leur vision, pose la tienne, en groupe, et laisse-les entrer dans ton noir."
+
+nodes:
+  n1:
+    intro:
+      - t: 0
+        clock: "23:50"
+        champions:
+          - { champion: Nautilus, team: ally, x: 46, y: 48, me: true }
+          - { champion: Viego, team: ally, x: 42, y: 52 }
+          - { champion: Ahri, team: ally, x: 48, y: 52 }
+          - { champion: Jinx, team: ally, x: 80, y: 88 }
+          - { champion: Ornn, team: ally, x: 10, y: 30 }
+          - { champion: LeeSin, team: enemy, x: 58, y: 24 }
+        wards:
+          - { id: e1, team: enemy, x: 32, y: 28 }
+          - { id: e2, team: enemy, x: 38, y: 22 }
+          - { id: a1, team: ally, x: 42, y: 38 }
+        objectives: [ { type: baron, spawn_in: 70 } ]
+        caption: "Ta balise de contrôle révèle deux balises ennemies autour du Baron."
+      - t: 3
+        clock: "23:53"
+        champions: [ { champion: LeeSin, x: 54, y: 20, hidden: true } ]
+        caption: "Lee Sin disparaît dans sa jungle."
+    question: "Il reste 70 secondes. Que fais-tu ?"
+    time_limit: 15
+    choices:
+      - id: a
+        text: "Attendre l'apparition du Baron près de ta balise"
+        grade: erreur
+        explanation: >
+          Avec leurs balises en place, les ennemis voient tous vos mouvements autour du Baron et préparent
+          leur engagement. Vous perdez l'effet de surprise.
+        consequence:
+          - { t: 0, clock: "24:30", champions: [ { champion: Nautilus, x: 42, y: 40 } ], caption: "Tu attends…" }
+          - { t: 3, clock: "25:00", champions: [ { champion: LeeSin, x: 40, y: 32, hidden: false } ], events: [ { type: kill, x: 42, y: 40 } ], caption: "Ils vous voient arriver et engagent de flanc." }
+        ending: blind
+      - id: b
+        text: "Détruire leurs balises avec ton jungler et poser ta balise au-dessus du Baron"
+        grade: excellent
+        explanation: >
+          Tu as la priorité et 70 s : c'est le moment d'enlever leur vision et de poser la tienne. Ton jungler
+          t'accompagne pour te protéger de Lee Sin.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 34, y: 28 }, { champion: Viego, x: 36, y: 30 } ], wards: [ { id: e1, removed: true } ], caption: "Première balise détruite." }
+          - { t: 3, champions: [ { champion: Nautilus, x: 38, y: 22 } ], wards: [ { id: e2, removed: true }, { id: a2, team: ally, x: 36, y: 18 } ], caption: "Deuxième balise détruite, la tienne est posée." }
+        next: n2
+      - id: c
+        text: "Aller seul détruire les balises"
+        grade: correct
+        explanation: >
+          Le bon objectif, mais seul dans la zone du Baron tu es une cible pour Lee Sin. Tu t'en sors, avec
+          moins de PV.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 34, y: 28 } ], wards: [ { id: e1, removed: true } ], caption: "Tu détruis une balise, seul." }
+          - { t: 3, champions: [ { champion: Nautilus, x: 38, y: 22 } ], wards: [ { id: e2, removed: true }, { id: a2, team: ally, x: 36, y: 18 } ], events: [ { type: ping, x: 46, y: 22, label: "Danger" } ], caption: "Lee Sin te frôle. Tu poses ta balise de justesse." }
+        next: n2
+
+  n2:
+    intro:
+      - t: 0
+        clock: "24:35"
+        champions: [ { champion: LeeSin, x: 40, y: 16, hidden: false } ]
+        events: [ { type: ping, x: 40, y: 16, label: "Lee Sin" } ]
+        caption: "Lee Sin entre sur ta balise pour la détruire, seul."
+      - t: 2
+        clock: "24:37"
+        champions: [ { champion: LeeSin, x: 37, y: 18 } ]
+        caption: "Il est à portée de ton grappin."
+    question: "Lee Sin est seul sur ta balise. Que fais-tu ?"
+    time_limit: 8
+    choices:
+      - id: a
+        text: "Grappin sur Lee Sin, avec Viego juste derrière"
+        grade: excellent
+        explanation: >
+          Il est seul, dans ta vision, et ton jungler est à côté : c'est un kill presque gratuit, qui vous
+          donne le Baron à 5 contre 4.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 38, y: 20 }, { champion: Viego, x: 37, y: 21 } ], caption: "Grappin !" }
+          - { t: 2, champions: [ { champion: LeeSin, dead: true } ], events: [ { type: kill, x: 37, y: 18 } ], caption: "Lee Sin tombe." }
+        next: n3
+      - id: b
+        text: "Reculer vers ton équipe"
+        grade: correct
+        explanation: >
+          Sûr, mais tu laisses passer un kill facile et ta balise est détruite. Vous gardez quand même la priorité.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 42, y: 38 } ], wards: [ { id: a2, removed: true } ], caption: "Tu recules. Lee Sin détruit ta balise." }
+        next: n3
+      - id: c
+        text: "Le poursuivre dans le brouillard"
+        grade: erreur
+        explanation: >
+          Il recule vers son équipe, que tu ne vois pas. Tu te fais attraper loin des tiens, juste avant le Baron.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 50, y: 14 }, { champion: LeeSin, x: 56, y: 12, hidden: true } ], caption: "Tu le suis dans le brouillard…" }
+          - { t: 2, champions: [ { champion: Nautilus, dead: true } ], events: [ { type: kill, x: 50, y: 14 } ], caption: "Quatre ennemis t'attendaient." }
+        ending: chased
+
+  n3:
+    intro:
+      - t: 0
+        clock: "25:00"
+        objectives: [ { type: baron } ]
+        caption: "Le Baron apparaît."
+      - t: 2
+        clock: "25:02"
+        events: [ { type: ping, x: 58, y: 40, label: "Ils arrivent" } ]
+        caption: "Les ennemis approchent par le mid, dans ta vision."
+    question: "Le Baron est là, les ennemis approchent. Que faites-vous ?"
+    time_limit: 10
+    choices:
+      - id: a
+        text: "Lancer le Baron tout de suite"
+        grade: erreur
+        explanation: >
+          Les ennemis sont tout proches : ils vous engagent pendant que le Baron vous tape. Le combat commence
+          dans le pire timing pour vous.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 34, y: 30 }, { champion: Viego, x: 33, y: 31 } ], caption: "Vous lancez le Baron…" }
+          - { t: 2, champions: [ { champion: Nautilus, dead: true }, { champion: Viego, dead: true } ], events: [ { type: kill, x: 34, y: 30 } ], caption: "Ils engagent pendant le Baron." }
+        ending: flipped
+      - id: b
+        text: "Vous placer dans votre vision et les attendre, puis faire le Baron"
+        grade: excellent
+        explanation: >
+          Ils doivent entrer dans votre zone, visibles, pour contester. Vous gagnez le combat avec l'avantage
+          de la position, puis le Baron est gratuit.
+        consequence:
+          - { t: 0, champions: [ { champion: Nautilus, x: 42, y: 36 }, { champion: Viego, x: 40, y: 34 }, { champion: Ahri, x: 44, y: 38 } ], caption: "Vous les attendez dans votre vision." }
+          - { t: 3, clock: "25:20", events: [ { type: objective, x: 33, y: 30, label: "Baron" } ], caption: "Engagement réussi, puis Baron pour vous." }
+        ending: best
+
+endings:
+  blind:
+    title: "Surpris au Baron"
+    outcome: { barons: -1, kills: -2 }
+    note: "Ils engagent de flanc grâce à leur vision et prennent le Baron."
+  chased:
+    title: "Attrapé dans le brouillard"
+    outcome: { barons: -1, kills: -1 }
+    note: "Sans support, ton équipe recule et laisse le Baron."
+  flipped:
+    title: "Fight perdu au Baron"
+    outcome: { barons: -1, kills: -3, gold: -2000 }
+  best:
+    title: "Baron pris avec le contrôle de vision"
+    outcome: { barons: 1, kills: 2, gold: 2500 }
+    note: "Leur vision détruite, la vôtre en place : ils n'avaient aucune bonne option."
