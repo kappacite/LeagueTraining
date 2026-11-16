@@ -75,7 +75,7 @@
 
 <style>
   .daily { margin-bottom: 1.5rem; }
-  .when { color: var(--lol-blue-light); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+  .when { color: #c6ad77; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 0.75rem; }
   .when::first-letter { text-transform: uppercase; }
   h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 0.75rem; }
   .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.75rem; }
@@ -93,7 +93,7 @@
   .roles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
   .tile { display: grid; justify-items: center; gap: 0.5rem; padding: 1.25rem 0.75rem; text-decoration: none; color: var(--lol-gold); }
   .tile:hover { color: var(--lol-gold-bright); }
-  .tile-name { font: 700 0.95rem var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--lol-gold-bright); }
+  .tile-name { font: 0.95rem var(--font-display); color: var(--lol-gold-bright); }
   .bar { width: 100%; height: 4px; background: var(--lol-black); border: 1px solid var(--lol-gold-deep); }
   .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--lol-blue-dark), var(--lol-hextech)); box-shadow: 0 0 8px var(--lol-hextech); }
   .count { font-size: 0.8rem; }

@@ -97,7 +97,7 @@
   .progress { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.4rem; }
   .waiting { font: 600 1.2rem var(--font-display); color: var(--lol-blue-light); letter-spacing: 0.06em; }
   h2 { font-size: 1.5rem; color: var(--lol-gold-bright); }
-  .verdict { display: flex; align-items: center; gap: 0.8rem; font: 700 2rem var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; animation: rise 400ms var(--ease) both; }
+  .verdict { display: flex; align-items: center; gap: 0.8rem; font: 2rem var(--font-display); animation: rise 400ms var(--ease) both; }
   .verdict .gem { width: 14px; height: 14px; transform: rotate(45deg); background: currentColor; box-shadow: 0 0 12px currentColor; }
   .verdict .num { margin-left: auto; font-size: 1.5rem; color: var(--lol-gold-bright); }
   .excellent { color: var(--excellent); }

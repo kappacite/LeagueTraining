@@ -133,6 +133,7 @@ def test_list_marks_done(client, conn):
     assert (rows["adc-antiheal-01"]["done"], rows["adc-antiheal-01"]["grade"]) == (False, None)
     assert [p["id"] for p in client.get("/api/puzzles?role=adc").json()] == ["adc-antiheal-01"]
     assert "choices" not in rows[P]
+    assert rows[P]["context"].startswith("14:20")  # shown in the list preview panel
 
 
 def test_concurrent_start_returns_existing_attempt(conn, dd, monkeypatch):

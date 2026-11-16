@@ -63,7 +63,7 @@
   .p1 :global(.avatar) { box-shadow: 0 0 0 2px var(--lol-gold), 0 0 18px rgba(200, 170, 110, 0.5); }
   .rank { font-size: 1.6rem; color: var(--lol-gold-dark); }
   .p1 .rank { font-size: 2.2rem; color: var(--lol-gold); }
-  .name { font: 700 1rem var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; color: var(--lol-gold-bright); }
+  .name { font: 1rem var(--font-display); color: var(--lol-gold-bright); }
   .pts { font-size: 1.5rem; color: var(--lol-gold-bright); }
   .pts small { font-size: 0.8rem; color: var(--lol-text-secondary); }
   .me { outline: 1px solid var(--lol-hextech); outline-offset: 3px; }

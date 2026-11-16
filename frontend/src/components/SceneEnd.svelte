@@ -88,7 +88,7 @@
   .outcome { display: grid; gap: 0.6rem; align-content: start; }
   .outcome.best { border-image: var(--metal) 1; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 22px rgba(11, 196, 226, 0.12); }
   h3 { margin: 0; }
-  .title { font: 700 1.3rem var(--font-display); color: var(--lol-gold-bright); text-transform: uppercase; letter-spacing: 0.04em; margin: 0; }
+  .title { font: 1.4rem var(--font-display); color: var(--lol-gold-bright); margin: 0; }
   ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; }
   li.up { color: var(--lol-success); }
   li.down { color: #e07a7a; }

@@ -44,7 +44,7 @@ def list_puzzles(role: Role | None = None, difficulty: Difficulty | None = None,
                  user=Depends(current_user), conn: sqlite3.Connection = Depends(get_conn),
                  catalog: Catalog = Depends(get_catalog)):
     done = {r["puzzle_id"]: r["grade"] for r in attempts_repo.scored_answered(conn, user["id"])}
-    return [{**p.summary().model_dump(), "done": p.id in done, "grade": done.get(p.id),
+    return [{**p.summary().model_dump(), "context": p.context, "done": p.id in done, "grade": done.get(p.id),
              "stale": catalog.is_stale(p)}
             for p in catalog.filter(role=role, difficulty=difficulty, type=type)]
 

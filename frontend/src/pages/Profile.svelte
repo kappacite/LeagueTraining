@@ -79,7 +79,7 @@
   .ring { fill: none; stroke: var(--lol-hextech); stroke-width: 4; stroke-linecap: butt; filter: drop-shadow(0 0 4px rgba(11, 196, 226, 0.8)); transition: stroke-dasharray 800ms var(--ease); }
   .icon { position: absolute; top: 42px; color: var(--lol-gold); }
   .empty .icon { color: var(--lol-muted); }
-  .name { font: 700 0.95rem var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--lol-gold-bright); }
+  .name { font: 0.95rem var(--font-display); color: var(--lol-gold-bright); }
   .small { font-size: 0.8rem; }
 
   .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
