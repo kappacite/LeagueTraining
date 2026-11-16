@@ -13,5 +13,5 @@
 
 <style>
   .items { display: inline-flex; gap: 3px; vertical-align: middle; }
-  img { border-radius: 3px; box-shadow: 0 0 0 1px var(--reed); }
+  img { border: 1px solid var(--lol-gold-dark); box-shadow: 0 0 0 1px var(--lol-black); }
 </style>

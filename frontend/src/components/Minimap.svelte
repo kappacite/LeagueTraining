@@ -45,16 +45,21 @@
 
 <style>
   figure { margin: 0; }
-  svg { width: 100%; height: auto; display: block; border-radius: 6px; background: #0c1a20; }
+  /* Gold setting around the map. */
+  svg {
+    width: 100%; height: auto; display: block; background: var(--lol-black);
+    border: 2px solid transparent; border-image: var(--metal) 1;
+    box-shadow: 0 0 0 4px var(--lol-black), 0 0 0 5px var(--lol-gold-deep), 0 18px 40px rgba(0, 0, 0, 0.6);
+  }
   .ring { fill: none; stroke-width: 3; }
-  .ring.ally { stroke: var(--ally); }
-  .ring.enemy { stroke: var(--enemy); }
-  .me-halo { fill: none; stroke: var(--excellent); stroke-width: 2; stroke-dasharray: 4 3; }
+  .ring.ally { stroke: var(--lol-blue-light); }
+  .ring.enemy { stroke: var(--lol-danger); }
+  .me-halo { fill: none; stroke: var(--lol-gold); stroke-width: 2; stroke-dasharray: 4 3; filter: drop-shadow(0 0 4px var(--lol-gold)); }
   .stale { opacity: 0.55; }
-  .ward { stroke: #0c1a20; stroke-width: 1.5; }
-  .ward.ally { fill: var(--ally); }
-  .ward.enemy { fill: var(--enemy); }
-  text { fill: var(--foam); font: 600 12px var(--display); paint-order: stroke; stroke: #0c1a20; stroke-width: 3px; }
-  figcaption { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.6rem; color: var(--mist); }
-  figcaption strong { color: var(--foam); margin-left: 0.3em; }
+  .ward { stroke: var(--lol-black); stroke-width: 1.5; }
+  .ward.ally { fill: var(--lol-hextech); filter: drop-shadow(0 0 3px var(--lol-hextech)); }
+  .ward.enemy { fill: var(--lol-danger); }
+  text { fill: var(--lol-gold-bright); font: 600 11px var(--font-body); paint-order: stroke; stroke: var(--lol-black); stroke-width: 3px; }
+  figcaption { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.9rem; color: var(--lol-text-secondary); font-size: 0.9rem; }
+  figcaption strong { color: var(--lol-gold-bright); margin-left: 0.3em; font-family: var(--font-display); }
 </style>
