@@ -59,7 +59,10 @@ def start(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: s
         step = conn.execute("select * from scene_steps where id = ?", (sid,)).fetchone()
     return {"puzzle": p.public(stale=catalog.is_stale(p)).model_dump(), "mode": row["mode"],
             "scored": bool(row["scored"]), "started_at": row["started_at"],
-            "step": _node(p, step["node_id"], step["started_at"])}
+            "step": _node(p, step["node_id"], step["started_at"]),
+            # Clips this play already showed, so a resumed play can rebuild the map state.
+            "played": [_clip(c) for c in p.clips_for(
+                [(s["node_id"], s["choice_id"]) for s in scene_steps.path(conn, row["id"])])]}
 
 
 def answer(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: str, choice_id: str,

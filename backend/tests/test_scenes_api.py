@@ -33,7 +33,7 @@ def answer(client, choice):
 def test_start_returns_first_node_only(client, conn):
     login(client, conn)
     r = start(client).json()
-    assert r["step"]["id"] == "n1" and r["scored"] is True
+    assert r["step"]["id"] == "n1" and r["scored"] is True and r["played"] == []
     assert [c["id"] for c in r["step"]["choices"]] == ["a", "b", "c"]
     assert "n2" not in str(r) and not keys(r) & FORBIDDEN
 
@@ -86,6 +86,8 @@ def test_restart_resumes_current_node(client, conn, clock):
     clock.advance(seconds=3)
     again = start(client, "normal").json()
     assert again["step"]["id"] == "n2" and again["mode"] == "chrono"
+    assert len(again["played"]) == 2  # n1 intro + n1.b consequence, to rebuild the map
+    assert start(client).json()["played"] == again["played"]
     assert again["step"]["started_at"].startswith("2026-11-16T12:00:05")
 
 

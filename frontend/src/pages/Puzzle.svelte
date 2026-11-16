@@ -8,6 +8,7 @@
   import DifficultyBadge from "../components/DifficultyBadge.svelte";
   import Result from "../components/Result.svelte";
   import RoleIcon from "../components/RoleIcon.svelte";
+  import SceneView from "../components/puzzles/SceneView.svelte";
 
   let { params } = $props();
   let session = $state(null); // StartResult from the server
@@ -61,6 +62,24 @@
     </div>
     {#if error}<p class="grade-erreur" role="alert">{error} <a href={href("list")}>Voir les puzzles</a></p>{/if}
   </section>
+{:else if p.type === "scene"}
+  <article class="scene">
+    <div class="brief rise">
+      <div class="meta">
+        <span class="role"><RoleIcon role={p.role} size={16} /> {ROLE_LABELS[p.role]}</span>
+        <DifficultyBadge difficulty={p.difficulty} />
+        <span class="muted">{TYPE_LABELS[p.type]}</span>
+      </div>
+      <h1>{p.title}</h1>
+      {#if !session.scored}<p class="notice practice">Déjà fait : entraînement, sans points.</p>{/if}
+      <p class="context">{p.context}</p>
+    </div>
+    <SceneView {session} puzzleId={params.id} />
+    <div class="next">
+      <button class="quiet" onclick={replay}>Rejouer</button>
+      <a class="button" href={href("list")}>Puzzle suivant</a>
+    </div>
+  </article>
 {:else}
   <article class="puzzle">
     <div class="brief rise">

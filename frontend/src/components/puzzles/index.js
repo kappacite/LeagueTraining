@@ -1,5 +1,6 @@
 // Mirror of the backend's puzzle type union: one view per type.
 import DecisionView from "./DecisionView.svelte";
 import ItemizationView from "./ItemizationView.svelte";
+import SceneView from "./SceneView.svelte";
 
-export const views = { decision: DecisionView, itemization: ItemizationView };
+export const views = { decision: DecisionView, itemization: ItemizationView, scene: SceneView };
