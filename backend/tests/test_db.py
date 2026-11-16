@@ -23,3 +23,21 @@ def test_only_one_scored_attempt_per_user_puzzle(conn):
     conn.execute(sql, (0,))
     with pytest.raises(sqlite3.IntegrityError):
         conn.execute(sql, (1,))
+
+
+def test_connection_can_be_closed_from_another_thread(tmp_path):
+    # FastAPI may run a dependency's setup and teardown on different worker threads.
+    import threading
+    conn = connect(tmp_path / "a.db")
+    errors = []
+
+    def close():
+        try:
+            conn.close()
+        except Exception as e:  # noqa: BLE001
+            errors.append(e)
+
+    t = threading.Thread(target=close)
+    t.start()
+    t.join()
+    assert errors == []

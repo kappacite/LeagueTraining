@@ -6,7 +6,8 @@ MIGRATIONS = Path(__file__).parent / "migrations"
 
 def connect(path: Path) -> sqlite3.Connection:
     path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(path)
+    # One connection per request, never shared concurrently; FastAPI may close it on another thread.
+    conn = sqlite3.connect(path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("pragma journal_mode=wal")
     conn.execute("pragma foreign_keys=on")
