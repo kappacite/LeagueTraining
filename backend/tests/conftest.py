@@ -9,3 +9,15 @@ def conn(tmp_path):
     migrate(c)
     yield c
     c.close()
+
+
+from pathlib import Path
+
+from app.ddragon import load as load_ddragon
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+@pytest.fixture
+def dd():
+    return load_ddragon(FIXTURES / "ddragon")
