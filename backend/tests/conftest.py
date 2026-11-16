@@ -71,9 +71,15 @@ def discord():
 
 
 @pytest.fixture
-def app(settings, dd, clock, discord, conn):
+def catalog_dir():
+    """Puzzles the test app serves; test modules override this fixture."""
+    return FIXTURES / "puzzles"
+
+
+@pytest.fixture
+def app(settings, dd, clock, discord, conn, catalog_dir):
     from app.main import create_app
-    a = create_app(settings, dd=dd, catalog=load_catalog(settings.puzzles_dir, dd))
+    a = create_app(settings, dd=dd, catalog=load_catalog(catalog_dir, dd))
     a.dependency_overrides[get_now] = lambda: clock.now
     a.dependency_overrides[get_http] = lambda: httpx.Client(transport=httpx.MockTransport(discord))
     return a

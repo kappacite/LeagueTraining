@@ -45,7 +45,7 @@ class AnswerResult:
     distribution: list[dict]
 
 
-def _puzzle(catalog: Catalog, puzzle_id: str):
+def get_puzzle(catalog: Catalog, puzzle_id: str):
     p = catalog.get(puzzle_id)
     if p is None:
         raise PuzzleNotFound(puzzle_id)
@@ -54,7 +54,7 @@ def _puzzle(catalog: Catalog, puzzle_id: str):
 
 def start(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: str, mode: Mode,
           now: datetime) -> StartResult:
-    p = _puzzle(catalog, puzzle_id)
+    p = get_puzzle(catalog, puzzle_id)
     # An open scored attempt is returned as-is: restarting must not reset the chrono or change the mode.
     row = attempts.open_scored(conn, user_id, puzzle_id)
     if row is None and not attempts.has_scored(conn, user_id, puzzle_id):
@@ -72,7 +72,7 @@ def start(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: s
 
 def answer(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: str, choice_id: str,
            now: datetime, grace_s: float, tz: ZoneInfo) -> AnswerResult:
-    p = _puzzle(catalog, puzzle_id)
+    p = get_puzzle(catalog, puzzle_id)
     row = attempts.open_scored(conn, user_id, puzzle_id) or attempts.open_practice(conn, user_id, puzzle_id)
     if row is None:
         raise NoOpenAttempt(puzzle_id)
