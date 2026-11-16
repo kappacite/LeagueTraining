@@ -5,6 +5,7 @@
   let { puzzle } = $props();
 </script>
 
+<div class="side">
 <div class="board">
   <section class="team ally">
     <h3>Ton équipe</h3>
@@ -29,10 +30,11 @@
   </section>
 </div>
 <div class="me"><span class="num gold">{puzzle.me.gold} PO</span> <span class="muted">à dépenser</span></div>
+</div>
 
 <style>
-  .board { grid-area: board; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .me { grid-area: me; }
+  .side { grid-area: board; display: grid; gap: 1rem; align-content: start; }
+  .board { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .team { padding: 1rem; background: var(--bank); border-radius: 6px; border-top: 3px solid; }
   .ally { border-color: var(--ally); }
   .enemy { border-color: var(--enemy); }

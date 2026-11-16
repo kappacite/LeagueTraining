@@ -62,6 +62,8 @@ def load_catalog(puzzles_dir: Path, dd: DDragon) -> Catalog:
         errors += [f"{rel}: {e}" for e in errs]
         if not errs:
             puzzles.append(p)
+    if not errors and not puzzles:
+        errors.append(f"no puzzle found in {puzzles_dir} (check PUZZLES_DIR)")
     if errors:
         raise PuzzleLoadError("\n".join(errors))
     return Catalog(puzzles, dd)

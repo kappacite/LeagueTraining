@@ -7,9 +7,8 @@
   const me = $derived(puzzle.me);
 </script>
 
-<div class="board">
-  <Minimap scene={puzzle.scene} />
-</div>
+<div class="side">
+<Minimap scene={puzzle.scene} />
 <div class="me">
   <img class="portrait" src={ddImg("champion", me.champion)} alt={me.champion} width="56" height="56" />
   <div class="bars">
@@ -24,10 +23,11 @@
     <ItemIcons items={me.items} size={28} />
   </div>
 </div>
+</div>
 
 <style>
-  .board { grid-area: board; }
-  .me { grid-area: me; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+  .side { grid-area: board; display: grid; gap: 1rem; }
+  .me { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
   .portrait { border-radius: 50%; box-shadow: 0 0 0 3px var(--ally); }
   .bars { display: grid; gap: 4px; min-width: 9rem; flex: 1; }
   .bar { position: relative; height: 20px; background: var(--river); border-radius: 3px; overflow: hidden; }

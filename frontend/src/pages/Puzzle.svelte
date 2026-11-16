@@ -15,11 +15,15 @@
   let error = $state("");
 
   async function begin(mode) {
+    if (busy) return;
+    busy = true;
     error = "";
     try {
       session = await api.start(params.id, mode);
     } catch (e) {
       error = e.status === 404 ? "Ce puzzle n'existe pas (ou plus)." : e.message;
+    } finally {
+      busy = false;
     }
   }
 
@@ -49,8 +53,8 @@
     <h1>Prêt ?</h1>
     <p class="muted">En mode chrono, tu as un temps limité pour répondre. Au-delà, la réponse compte comme une erreur.</p>
     <div class="modes">
-      <button onclick={() => begin("normal")}>Jouer</button>
-      <button class="quiet" onclick={() => begin("chrono")}>Jouer en chrono</button>
+      <button disabled={busy} onclick={() => begin("normal")}>Jouer</button>
+      <button class="quiet" disabled={busy} onclick={() => begin("chrono")}>Jouer en chrono</button>
     </div>
     {#if error}<p class="grade-erreur" role="alert">{error} <a href={href("list")}>Voir les puzzles</a></p>{/if}
   </section>
@@ -91,7 +95,8 @@
   .puzzle {
     display: grid; gap: 1.5rem 2.5rem;
     grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
-    grid-template-areas: "board brief" "board answer" "me answer";
+    grid-template-areas: "board brief" "board answer";
+    grid-template-rows: auto 1fr;
     align-items: start;
   }
   .brief { grid-area: brief; }
@@ -102,6 +107,6 @@
   .hint { font-size: 0.85rem; margin-top: 0.75rem; }
   .next { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem; }
   @media (max-width: 52rem) {
-    .puzzle { grid-template-columns: 1fr; grid-template-areas: "brief" "board" "me" "answer"; }
+    .puzzle { grid-template-columns: 1fr; grid-template-areas: "brief" "board" "answer"; }
   }
 </style>

@@ -3,7 +3,7 @@
   import { toSvg } from "../lib/minimap.js";
 
   let { scene, size = 420 } = $props();
-  const r = $derived(size * 0.045);
+  const r = $derived(size * 0.034);
   const OBJECTIVES = { dragon: "Dragon", baron: "Baron Nashor", herald: "Héraut", grubs: "Larves du Néant", atakhan: "Atakhan" };
 </script>
 

@@ -133,3 +133,32 @@ def test_list_marks_done(client, conn):
     assert (rows["adc-antiheal-01"]["done"], rows["adc-antiheal-01"]["grade"]) == (False, None)
     assert [p["id"] for p in client.get("/api/puzzles?role=adc").json()] == ["adc-antiheal-01"]
     assert "choices" not in rows[P]
+
+
+def test_concurrent_start_returns_existing_attempt(conn, dd, monkeypatch):
+    # Simulate the race: request B checks before request A has inserted, then inserts after A.
+    from app.puzzles.loader import load_catalog
+    from app.repositories import attempts as repo, users
+    from app.services import attempts as svc
+    from conftest import FIXTURES, T0
+    catalog = load_catalog(FIXTURES / "puzzles", dd)
+    uid = users.upsert(conn, "1", "a", None, T0)
+    first = svc.start(conn, catalog, uid, P, "chrono", T0)
+    real_open = repo.open_scored
+    calls = []
+    monkeypatch.setattr(repo, "open_scored", lambda *a: None if not calls.append(1) and len(calls) == 1 else real_open(*a))
+    monkeypatch.setattr(repo, "has_scored", lambda *a: False)
+    second = svc.start(conn, catalog, uid, P, "normal", T0)
+    assert (second.scored, second.mode, second.started_at) == (True, "chrono", first.started_at)
+
+
+def test_practice_replay_uses_requested_mode_and_fresh_timer(client, conn, clock):
+    login(client, conn)
+    start(client)
+    answer(client, "b")
+    start(client, "chrono")  # practice in chrono, abandoned
+    clock.advance(days=1)
+    s = start(client, "normal").json()
+    assert (s["scored"], s["mode"]) == (False, "normal")
+    r = answer(client, "b").json()
+    assert (r["timed_out"], r["grade"]) == (False, "excellent")

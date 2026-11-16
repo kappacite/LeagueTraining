@@ -120,3 +120,10 @@ def test_repo_puzzles_are_valid():
     except DDragonMissing:
         pytest.skip("no real Data Dragon cache; run python -m app.admin sync-ddragon")
     assert load_catalog(REPO_PUZZLES, real).all()
+
+
+def test_missing_or_empty_dir_rejected(tmp_path, dd):
+    with pytest.raises(PuzzleLoadError, match="no puzzle"):
+        load_catalog(tmp_path / "nope", dd)
+    with pytest.raises(PuzzleLoadError, match="no puzzle"):
+        load_catalog(tmp_path, dd)

@@ -58,10 +58,14 @@ def start(conn: sqlite3.Connection, catalog: Catalog, user_id: int, puzzle_id: s
     # An open scored attempt is returned as-is: restarting must not reset the chrono or change the mode.
     row = attempts.open_scored(conn, user_id, puzzle_id)
     if row is None and not attempts.has_scored(conn, user_id, puzzle_id):
-        row = attempts.get(conn, attempts.create(conn, user_id, puzzle_id, mode, now, scored=True))
-    elif row is None:
-        row = attempts.open_practice(conn, user_id, puzzle_id) or attempts.get(
-            conn, attempts.create(conn, user_id, puzzle_id, mode, now, scored=False))
+        try:
+            row = attempts.get(conn, attempts.create(conn, user_id, puzzle_id, mode, now, scored=True))
+        except sqlite3.IntegrityError:  # a concurrent request (double click, two tabs) created it first
+            conn.rollback()
+            row = attempts.open_scored(conn, user_id, puzzle_id)
+    if row is None:
+        # Practice attempts are unscored: always fresh, in the requested mode.
+        row = attempts.get(conn, attempts.create(conn, user_id, puzzle_id, mode, now, scored=False))
     return StartResult(puzzle=p.public(stale=catalog.is_stale(p)), mode=row["mode"],
                        started_at=datetime.fromisoformat(row["started_at"]), scored=bool(row["scored"]))
 
