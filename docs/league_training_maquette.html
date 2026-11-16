@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeagueTraining — Entraînement</title>
+<style>
+:root {
+  --bg: #07101a;
+  --nav: #080f18;
+  --surface: #0b1825;
+  --surface2: #102133;
+  --border: #223243;
+  --border-low: #1a2938;
+  --text: #e8e6de;
+  --muted: #8d99a5;
+  --dim: #667484;
+  --gold: #c6a86b;
+  --gold-dim: #74603e;
+  --cyan: #32bbbf;
+  --red: #db746f;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0; color:var(--text); background:
+  radial-gradient(ellipse 70% 80% at 50% 12%,rgba(22,51,75,.25),transparent 75%),
+  linear-gradient(180deg,#07121e 0%,#070e17 90%); font:14px/1.45 "Segoe UI",Inter,Arial,sans-serif; min-height:100vh; }
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{height:69px;background:rgba(6,13,22,.97);border-bottom:1px solid #283440;display:flex;align-items:center;padding:0 56px;gap:53px;}
+.brand{display:flex;align-items:center;gap:13px;color:#e8d5a6;text-decoration:none;white-space:nowrap}
+.brand-mark{font:32px/1 Georgia,serif;color:#d5b876;position:relative;letter-spacing:-5px; padding:0 7px 0 0;text-shadow:0 0 11px rgba(184,152,86,.19)}
+.brand-mark:after{content:"";position:absolute;left:3px;bottom:-1px;width:19px;height:1px;background:#b79d68}
+.brand-name{font:small-caps 21px/1 Georgia,serif;letter-spacing:.06em}
+.brand-name span{color:#b9c1c9}
+nav{display:flex;height:100%;gap:6px;align-items:stretch}
+.navitem{display:flex;align-items:center;position:relative;gap:10px;padding:0 21px;color:#939ba3;text-decoration:none;font-weight:600;letter-spacing:.015em}
+.navitem svg{opacity:.77}
+.navitem:hover{color:#ece8db}
+.navitem.active{color:#f0ede7}
+.navitem.active:after{content:"";position:absolute;bottom:0;height:2px;background:var(--gold);left:20px;right:20px;box-shadow:0 -1px 8px rgba(202,171,100,.2)}
+.navitem.active svg{color:var(--gold);opacity:1}
+.user{margin-left:auto;display:flex;align-items:center;gap:13px;white-space:nowrap;color:#dfdfe0;font-weight:600}
+.avatar{height:31px;width:31px;border:1px solid #887449;border-radius:50%;display:grid;place-items:center;background:#172234;color:#e8d3a3;font:17px Georgia,serif}
+.chev{color:#83909b;margin-left:3px}
+main{max-width:1336px;margin:auto;padding:53px 22px 66px}
+.eyebrow{color:#ac9265;font-weight:700;font-size:11px;letter-spacing:.19em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.eyebrow:before{content:"";width:22px;height:1px;background:var(--gold-dim)}
+.heading{display:flex;justify-content:space-between;align-items:end;margin-top:14px;margin-bottom:35px}
+h1{margin:0;font:normal 44px/1.1 Georgia,"Times New Roman",serif;letter-spacing:.005em;color:#f1e6d1}
+.subtitle{color:#a3adb5;font-size:14px;margin:11px 0 0}
+.heading-side{display:flex;align-items:center;gap:12px;color:#8e9ca9;padding-bottom:5px;font-size:13px}
+.heading-side b{font-weight:600;color:#ddd9c9}
+.dot{height:4px;width:4px;background:#667688;border-radius:50%}
+.workspace{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(320px,1fr);gap:22px;align-items:start}
+.left{min-width:0}
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:17px}
+.search{flex:1;min-width:120px;display:flex;align-items:center;gap:12px;height:42px;padding:0 14px;color:#8593a0;background:#0c1926;border:1px solid #27394a}
+.search input{outline:0;border:0;background:transparent;color:#eee;width:100%;font-size:13px}
+.search input::placeholder{color:#81909e}
+.filter{position:relative;flex:0 0 128px;height:42px;background:#0c1926;border:1px solid #27394a;color:#c0c7ce;padding:0 13px;text-align:left;display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.filter:after{content:"";width:7px;height:7px;border-bottom:1px solid #9da9b1;border-right:1px solid #9da9b1;transform:rotate(45deg) translateY(-2px);margin-right:3px}
+.section-label{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#8798a7;margin:0 0 11px}
+.section-label .count{font-size:12px;letter-spacing:0;color:#68798a;font-weight:500}
+.list{border:1px solid var(--border-low);background:rgba(8,18,28,.75)}
+.exercise{display:flex;align-items:center;gap:16px;padding:0 19px;height:77px;border-bottom:1px solid #223040;position:relative;text-decoration:none;color:inherit;background:rgba(12,26,39,.27);transition:background .16s ease}
+.exercise:last-child{border-bottom:0}
+.exercise:hover{background:#132638}
+.exercise.selected{background:linear-gradient(90deg,#142f3b 0%,#102331 59%,#0d1c2a 100%)}
+.exercise.selected:before{content:"";position:absolute;width:2px;top:0;bottom:0;left:-1px;background:#c5a465}
+.ex-icon{height:38px;width:38px;border:1px solid #344456;display:grid;place-items:center;flex-shrink:0;color:#a6b1b6;font-size:17px}
+.exercise.selected .ex-icon{color:#e6cc93;border-color:#716649;background:rgba(202,165,99,.05)}
+.ex-details{min-width:0;flex:1}
+.ex-title{font-size:14px;letter-spacing:.006em;font-weight:600;color:#e9e9e6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-sub{margin-top:5px;display:flex;align-items:center;gap:9px;color:#82919e;font-size:12px;white-space:nowrap}
+.sep{height:3px;width:3px;border-radius:50%;background:#536878}
+.diff{font-size:10px;font-weight:750;letter-spacing:.085em;text-transform:uppercase}
+.diff.easy{color:#4cc8c7}.diff.medium{color:#cfb47a}.diff.hard{color:#d37a74}
+.status{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.07em;color:#8e9ba6;text-transform:uppercase;white-space:nowrap}
+.status.success{color:#60bcb6}.status.error{color:#c68f87}
+.row-arrow{color:#526677;margin-left:6px}
+.exercise.selected .row-arrow{color:#c1a46d}
+.detail{background:linear-gradient(175deg,#0f2232 0%,#0b1a28 43%,#0a1724 100%);border:1px solid #29394a;min-height:670px;position:relative;overflow:hidden;}
+.detail:before{content:"";position:absolute;right:-160px;top:-230px;width:410px;height:410px;border:1px solid rgba(139,173,179,.06);border-radius:50%;box-shadow:0 0 0 55px rgba(105,143,163,.017),0 0 0 115px rgba(105,143,163,.012);pointer-events:none}
+.detail:after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#b79960 0%,#a68e5a 29%,transparent 75%);opacity:.9}
+.detail-head{padding:24px 27px 0;display:flex;justify-content:space-between;align-items:center;color:#a6b5c0;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase}
+.detail-head span:last-child{font-size:11px;color:#647e90;font-weight:500;letter-spacing:.02em}
+.detail-body{padding:37px 27px 28px;position:relative;z-index:1}
+.detail-kicker{font-size:11px;color:#c6ad77;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:15px}
+h2{font:normal 30px/1.17 Georgia,"Times New Roman",serif;color:#efe8d9;letter-spacing:.002em;margin:0 0 20px}
+.chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.chip{font-size:11px;padding:5px 9px;border:1px solid #344456;color:#a7b6c3;background:#101f2c}
+.chip.cyan{border-color:#245259;color:#5cccc8}
+.rule{height:1px;background:linear-gradient(90deg,#5e533f,rgba(62,79,91,.6),transparent);margin-bottom:27px}
+.content-label{font-size:10px;color:#8d9ba7;text-transform:uppercase;letter-spacing:.14em;font-weight:750;margin-bottom:14px}
+.desc{font-size:15px;color:#c1cad2;line-height:1.72;margin:0 0 36px;max-width:350px}
+.meta{display:grid;grid-template-columns:1fr 1fr;margin:0 0 33px;border-top:1px solid #293947;border-bottom:1px solid #293947;padding:18px 0}
+.meta>div+div{border-left:1px solid #293947;padding-left:20px}
+.meta small{display:block;color:#7e8f9c;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.meta strong{font-size:13px;font-weight:600;color:#d8dad8}
+.start{width:100%;height:47px;color:#0c1420;background:linear-gradient(180deg,#d1b778,#bea06a);border:1px solid #ead29b;font-weight:750;font-size:12px;letter-spacing:.09em;text-transform:uppercase;transition:filter .16s ease}
+.start:hover{filter:brightness(1.09)}
+.small-note{margin-top:17px;color:#8193a1;font-size:12px;text-align:center}
+.detail-bottom{margin-top:36px;color:#728594;border-top:1px solid #253545;padding-top:20px;font-size:12px;line-height:1.65}
+.footer{margin-top:21px;font-size:11px;color:#596c7a;display:flex;align-items:center;justify-content:space-between}
+.footer a{color:#82909c;text-decoration:none}
+@media(max-width:1040px){header{padding:0 24px;gap:20px}.brand-name{font-size:17px}.navitem{padding:0 11px}main{padding:34px 24px}.workspace{grid-template-columns:1fr}.detail{min-height:unset}.detail-body{padding-top:25px}.detail-bottom{margin-top:20px}}
+@media(max-width:680px){header{height:61px;padding:0 17px}.brand-name{font-size:15px}nav{gap:0}.navitem{padding:0 9px}.navitem:not(.active){display:none}.user span:not(.avatar){display:none}main{padding:28px 14px}.heading{display:block;margin-bottom:25px}.heading-side{margin-top:20px}h1{font-size:35px}.toolbar{flex-wrap:wrap}.search{flex-basis:100%}.filter{flex:1 1 29%;font-size:12px}.exercise{padding:0 11px;gap:10px}.status{font-size:9px}.row-arrow{display:none}.ex-title{font-size:13px}.ex-icon{height:32px;width:32px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#"><span class="brand-mark">L</span><span class="brand-name">LEAGUE<span>TRAINING</span></span></a>
+  <nav aria-label="Navigation principale">
+    <a class="navitem" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3-9 8h2v10h6v-6h3v6h6V11h2z"/></svg>Accueil</a>
+    <a class="navitem active" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m6.1 2 3.1 5.4L7.5 9 3 6.5V4L6.1 2ZM18 2l3 2v2.5L16.5 9l-1.7-1.6L18 2ZM12 9.8l6.7 6.7-2.2 2.2L9.8 12zm-2.2 2.1L3.3 18.4 5.6 21l6.5-6.6z"/></svg>Entraînement</a>
+    <a class="navitem" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 3h10v3h4v3c0 3-2 5-5 5-.6 1.5-1.7 2.5-3 2.8V20h4v2H7v-2h4v-3.2c-1.3-.3-2.4-1.3-3-2.8-3 0-5-2-5-5V6h4V3Zm0 5H5v1c0 1.5.7 2.4 2 2.8V8Zm10 0v3.8c1.3-.4 2-1.3 2-2.8V8h-2Z"/></svg>Classement</a>
+  </nav>
+  <div class="user"><span class="avatar">R</span><span>Robyn</span><svg class="chev" width="10" height="10" viewBox="0 0 16 16"><path d="m3 6 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
+</header>
+<main>
+  <div class="eyebrow">Centre d'entraînement</div>
+  <div class="heading">
+    <div><h1>Entraînement</h1><p class="subtitle">Travaille tes décisions à travers des situations inspirées de tes parties.</p></div>
+    <div class="heading-side"><b>8 exercices</b><span class="dot"></span>2 rôles disponibles</div>
+  </div>
+  <div class="workspace">
+    <section class="left">
+      <div class="toolbar">
+        <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input placeholder="Rechercher un exercice" aria-label="Rechercher un exercice"></label>
+        <button class="filter">Tous les rôles</button><button class="filter">Difficulté</button><button class="filter">Type</button>
+      </div>
+      <div class="section-label"><span>EXERCICES DISPONIBLES</span><span class="count">8 résultats</span></div>
+      <div class="list">
+        <a href="#" class="exercise selected" data-title="Soraka et Aatrox en face" data-tags="ADC|Itemisation|Facile" data-desc="Tu joues ADC contre une composition qui possède beaucoup de soins. Identifie l'option d'équipement la plus adaptée à la situation." data-role="ADC" data-type="Itemisation" data-diff="Facile">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Soraka et Aatrox en face</div><div class="ex-sub"><span class="diff easy">Facile</span><span class="sep"></span>ADC · Itemisation</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="1300 PO en poche" data-tags="ADC|Décision|Moyen" data-desc="Il est temps de retourner à la base. Examine les options d'achat et choisis celle qui renforce le mieux ton prochain timing." data-role="ADC" data-type="Décision" data-diff="Moyen">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">1300 PO en poche</div><div class="ex-sub"><span class="diff medium">Moyen</span><span class="sep"></span>ADC · Décision</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Seul contre deux" data-tags="ADC|Décision|Facile" data-desc="Tu te retrouves en infériorité numérique. Analyse les informations disponibles avant de choisir ta prochaine action." data-role="ADC" data-type="Décision" data-diff="Facile">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Seul contre deux</div><div class="ex-sub"><span class="diff easy">Facile</span><span class="sep"></span>ADC · Décision</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Qui frapper ?" data-tags="ADC|Décision|Difficile" data-desc="Au début d'un combat, plusieurs cibles sont accessibles. Repère la priorité la plus pertinente." data-role="ADC" data-type="Décision" data-diff="Difficile">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Qui frapper ?</div><div class="ex-sub"><span class="diff hard">Difficile</span><span class="sep"></span>ADC · Décision</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Kha’Zix et Zed te visent" data-tags="ADC|Itemisation|Moyen" data-desc="Deux assassins peuvent t'atteindre en combat. Prépare une réponse adaptée à leur menace." data-role="ADC" data-type="Itemisation" data-diff="Moyen">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Kha’Zix et Zed te visent</div><div class="ex-sub"><span class="diff medium">Moyen</span><span class="sep"></span>ADC · Itemisation</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Trois tanks en face" data-tags="ADC|Itemisation|Difficile" data-desc="La composition adverse repose sur une frontline résistante. Adapte tes choix d'objets à ce besoin." data-role="ADC" data-type="Itemisation" data-diff="Difficile">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Trois tanks en face</div><div class="ex-sub"><span class="diff hard">Difficile</span><span class="sep"></span>ADC · Itemisation</div></div><span class="status error">Erreur</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Leurs tanks empilent l’armure" data-tags="Jungle|Itemisation|Moyen" data-desc="Tu joues dans la jungle et les ennemis accumulent de l'armure. Sélectionne la meilleure adaptation." data-role="Jungle" data-type="Itemisation" data-diff="Moyen">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Leurs tanks empilent l’armure</div><div class="ex-sub"><span class="diff medium">Moyen</span><span class="sep"></span>Jungle · Itemisation</div></div><span class="status">À relever</span><span class="row-arrow">›</span>
+        </a>
+        <a href="#" class="exercise" data-title="Kill sur leur ADC à 28 minutes" data-tags="Jungle|Décision|Difficile" data-desc="Tu viens de sortir le carry adverse en fin de partie. Décide comment convertir cet avantage en objectif." data-role="Jungle" data-type="Décision" data-diff="Difficile">
+          <div class="ex-icon">⌁</div><div class="ex-details"><div class="ex-title">Kill sur leur ADC à 28 minutes</div><div class="ex-sub"><span class="diff hard">Difficile</span><span class="sep"></span>Jungle · Décision</div></div><span class="status success">Excellent</span><span class="row-arrow">›</span>
+        </a>
+      </div>
+      <div class="footer"><span>Interface conceptuelle — design système LeagueTraining</span><a href="#">Signaler un problème</a></div>
+    </section>
+    <aside class="detail" aria-label="Aperçu de l'exercice sélectionné">
+      <div class="detail-head"><span>APERÇU DE L'EXERCICE</span><span>01 / 08</span></div>
+      <div class="detail-body">
+        <div class="detail-kicker">Situation de jeu</div>
+        <h2 id="preview-title">Soraka et Aatrox<br>en face</h2>
+        <div class="chips" id="preview-chips"><span class="chip">ADC</span><span class="chip">Itemisation</span><span class="chip cyan">Facile</span></div>
+        <div class="rule"></div>
+        <div class="content-label">Contexte</div>
+        <p class="desc" id="preview-desc">Tu joues ADC contre une composition qui possède beaucoup de soins. Identifie l'option d'équipement la plus adaptée à la situation.</p>
+        <div class="meta"><div><small>Rôle</small><strong id="preview-role">ADC</strong></div><div><small>Compétence</small><strong id="preview-type">Itemisation</strong></div></div>
+        <button class="start">Commencer l'exercice &nbsp; →</button>
+        <div class="small-note">Une situation, une décision.</div>
+        <div class="detail-bottom">Sélectionne un autre exercice dans la liste pour afficher ses informations ici.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+<script>
+const exercises=[...document.querySelectorAll('.exercise')];
+const title=document.getElementById('preview-title');
+const desc=document.getElementById('preview-desc');
+const role=document.getElementById('preview-role');
+const type=document.getElementById('preview-type');
+const chips=document.getElementById('preview-chips');
+const counter=document.querySelector('.detail-head span:last-child');
+exercises.forEach((ex,i)=>ex.addEventListener('click',e=>{
+  e.preventDefault();exercises.forEach(x=>x.classList.remove('selected'));ex.classList.add('selected');
+  title.textContent=ex.dataset.title;desc.textContent=ex.dataset.desc;role.textContent=ex.dataset.role;type.textContent=ex.dataset.type;
+  chips.replaceChildren(...ex.dataset.tags.split('|').map((t,j)=>{const el=document.createElement('span');el.className='chip'+(j===2?' cyan':'');el.textContent=t;return el}));
+  counter.textContent=String(i+1).padStart(2,'0')+' / '+String(exercises.length).padStart(2,'0');
+}));
+const inp=document.querySelector('.search input');inp.addEventListener('input',()=>{let matches=0;exercises.forEach(ex=>{const show=ex.dataset.title.toLowerCase().includes(inp.value.toLowerCase());ex.style.display=show?'':'none';if(show)matches++;});document.querySelector('.count').textContent=matches+' résultats';});
+</script>
+</body>
+</html>
